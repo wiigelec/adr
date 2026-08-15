@@ -2,7 +2,7 @@
 
 ## Status
 
-Candidate functional-set direction. Directional and non-normative.
+Approved functional-set direction. Directional and non-normative.
 
 ## Metadata
 
@@ -16,7 +16,7 @@ Candidate functional-set direction. Directional and non-normative.
   "title": "ADR Candidate Functional Set",
   "product_id": "adr",
   "authority_category": "directional",
-  "lifecycle_status": "candidate",
+  "lifecycle_status": "approved",
   "governing_issue": "#5",
   "required_content_areas": {
     "capability_boundary": [
@@ -72,14 +72,14 @@ Candidate functional-set direction. Directional and non-normative.
       ]
     }
   ],
-  "successor_action": "Review the exact candidate boundary for explicit user approval. Do not begin decomposition while lifecycle status remains candidate.",
+  "successor_action": "Begin successor governed product decomposition from this approved functional-set boundary; decomposition handoff is ready.",
   "schema_version": "1"
 }
 ```
 
 ## Overview
 
-This candidate functional set records the analysis-favored ADR FS0/core boundary: governed agent initialization and continuity. It remains directional and non-normative and does not establish exact product behavior, interfaces, schemas, implementation architecture, or release readiness.
+This approved functional set records the explicitly user-approved ADR FS0/core boundary: governed agent initialization and continuity. It remains directional and non-normative and does not establish exact product behavior, interfaces, schemas, implementation architecture, or release readiness.
 
 ## Chunk index
 
@@ -91,7 +91,7 @@ This candidate succeeds the [ADR Product Analysis](./ADR-ANALYSIS.md) and preser
 
 ## Next authorized action
 
-Review this exact candidate boundary. Explicit user approval is required before lifecycle status may become `approved` or decomposition handoff may be declared ready.
+This exact functional-set boundary has explicit user approval. Decomposition handoff is ready for successor governed work.
 
 ## Discoverability
 

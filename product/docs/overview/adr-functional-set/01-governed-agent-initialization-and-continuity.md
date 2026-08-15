@@ -80,6 +80,6 @@ Candidate A is represented here because the accepted analysis favors it as the s
 
 ## Decomposition handoff
 
-Decomposition handoff is **not ready** while this artifact remains `candidate`.
+Decomposition handoff is **ready** because this exact functional-set boundary has explicit user approval and lifecycle status `approved`.
 
-The next decision is explicit user review of this exact bounded direction. Only an explicit approval transition may change the lifecycle status to `approved` and declare decomposition handoff readiness. Any requested boundary change before approval is candidate revision, not implicit approval.
+Successor governed product decomposition may now consume this approved boundary. This approval does not itself authorize decomposition artifacts outside a separately governed successor issue, and any material boundary change requires returning to candidate revision.
