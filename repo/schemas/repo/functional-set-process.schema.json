@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "repo/schemas/repo/functional-set-process.schema.json",
+  "title": "Functional-Set Process Document Schema",
+  "allOf": [
+    {
+      "$ref": "./development-document-base.schema.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "artifact_type",
+        "root_path",
+        "required_content_areas"
+      ],
+      "properties": {
+        "artifact_type": {
+          "type": "string",
+          "enum": [
+            "overview-whiteboard",
+            "overview-analysis",
+            "functional-set"
+          ]
+        },
+        "root_path": {
+          "type": "string",
+          "enum": [
+            "repo/docs/overview/",
+            "product/docs/overview/"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "overview-whiteboard"
+          }
+        },
+        "required": [
+          "artifact_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authority_category": {
+            "const": "evidentiary"
+          },
+          "lifecycle_status": {
+            "enum": [
+              "active",
+              "superseded",
+              "retired"
+            ]
+          },
+          "required_content_areas": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "collected_input",
+              "provenance",
+              "unresolved_intent"
+            ],
+            "properties": {
+              "collected_input": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "provenance": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "unresolved_intent": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "overview-analysis"
+          }
+        },
+        "required": [
+          "artifact_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authority_category": {
+            "const": "directional"
+          },
+          "lifecycle_status": {
+            "enum": [
+              "candidate",
+              "superseded",
+              "retired"
+            ]
+          },
+          "required_content_areas": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_evidence",
+              "candidate_groupings",
+              "dependencies",
+              "ambiguities",
+              "candidate_functional_sets"
+            ],
+            "properties": {
+              "source_evidence": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "candidate_groupings": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "dependencies": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "ambiguities": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "candidate_functional_sets": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "functional-set"
+          }
+        },
+        "required": [
+          "artifact_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authority_category": {
+            "const": "directional"
+          },
+          "lifecycle_status": {
+            "enum": [
+              "candidate",
+              "approved",
+              "superseded",
+              "retired"
+            ]
+          },
+          "required_content_areas": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "capability_boundary",
+              "included_intent",
+              "exclusions",
+              "dependencies",
+              "integration_foundation",
+              "end_to_end_usability",
+              "decomposition_handoff"
+            ],
+            "properties": {
+              "capability_boundary": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "included_intent": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "exclusions": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "dependencies": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "integration_foundation": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "end_to_end_usability": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              },
+              "decomposition_handoff": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//).+\\.md$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "unevaluatedProperties": false
+}

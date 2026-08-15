@@ -1,0 +1,12 @@
+{
+  "schema_version": "2",
+  "initializer_name": "repo-spec-init",
+  "initializer_version": "1",
+  "framework_repository": "/home/wiigelec/git/repo-spec",
+  "framework_revision": {
+    "object_format": "sha1",
+    "object_id": "f8af4b71b7ed45a677a0ffeba435350ad0d821fe"
+  },
+  "initialization_timestamp": "2026-08-15T02:31:33Z",
+  "request_fingerprint": "aca6757dee5f71ee6e84cb390c7c925ceab6930d49e2ea953d213ae8862a3726"
+}

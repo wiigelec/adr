@@ -1,0 +1,68 @@
+{
+  "spec_id": "repo.functional-set-process",
+  "title": "Functional-Set Process Contract",
+  "purpose": "Defines the repository-generic collection, analysis, candidate-functional-set, and approved-functional-set process governing the pre-decomposition lifecycle.",
+  "status": "accepted",
+  "schema_version": "1",
+  "normative_requirements": [
+    {
+      "id": "REPO-FSP-001",
+      "text": "Overview-process artifacts shall be stored under the owner-specific overview root defined by `repo.development-document-base`: repository/framework-owned artifacts under `repo/docs/overview/` and product-owned artifacts under `product/docs/overview/`. The recognized artifact types are `overview-whiteboard`, `overview-analysis`, and `functional-set`."
+    },
+    {
+      "id": "REPO-FSP-002",
+      "text": "An overview whiteboard shall durably record unordered user statements, discovered evidence, provenance, and unresolved intent before interpretation. Collection shall not prematurely convert that material into requirements, decomposition, specifications, implementation plans, implementation, or functional-set approval."
+    },
+    {
+      "id": "REPO-FSP-003",
+      "text": "An overview analysis shall consume recorded whiteboard evidence and identify capability-oriented groupings, dependencies, ambiguities, candidate functional-set boundaries, and candidate FS0/core choices without itself establishing approved product direction."
+    },
+    {
+      "id": "REPO-FSP-004",
+      "text": "A functional set shall be capability-oriented rather than a technical-layer slice, shall define a bounded directional unit suitable for downstream decomposition, and shall remain non-normative with respect to exact product behavior, interfaces, schemas, implementation architecture, and release readiness."
+    },
+    {
+      "id": "REPO-FSP-005",
+      "text": "A functional-set artifact shall use lifecycle status `candidate` until explicit user approval and `approved` after that decision. Candidate status shall not authorize decomposition. Approval shall establish the bounded directional handoff point for decomposition, later specification work, planning, implementation, tests, integration, and functional-set-bounded audit traversal."
+    },
+    {
+      "id": "REPO-FSP-006",
+      "text": "Whiteboard evidence shall persist beyond functional-set approval so deferred or unaccepted intent remains available for successor analysis. Analysis and functional-set documents shall preserve predecessor and evidence traceability rather than silently absorbing unresolved intent."
+    },
+    {
+      "id": "REPO-FSP-007",
+      "text": "The overview process shall support multiple candidate functional sets, including candidate FS0/core choices, before approval. An approved functional set shall explicitly declare decomposition handoff readiness."
+    }
+  ],
+  "dependencies": [
+    {
+      "spec_id": "repo.development-document-base"
+    },
+    {
+      "spec_id": "repo.repository-structure"
+    },
+    {
+      "spec_id": "repo.validation"
+    }
+  ],
+  "references": [
+    {
+      "type": "specification",
+      "spec_id": "repo.development-document-base"
+    },
+    {
+      "type": "specification",
+      "spec_id": "repo.repository-structure"
+    },
+    {
+      "type": "specification",
+      "spec_id": "repo.validation"
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "type": "markdown",
+      "path": "repo/derived/specs/repo/functional-set-process.md"
+    }
+  ]
+}
