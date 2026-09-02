@@ -81,9 +81,13 @@ FS-002 does not retroactively change the Design revision selected by FS-001.
 
 ## Planning Result
 
-FS-002 is opened through:
+FS-002 is realized through:
 
-- this Functional Set boundary; and
-- `plan.md`.
+- this Functional Set boundary;
+- `plan.md`;
+- `product/specs/FS-002-adr-application-instances.md`; and
+- one Build-produced distributable seed-spec artifact derived from the accepted canonical FS-002 specification state.
 
-The normative specification and any Build realization are subsequent Planning and Build work for FS-002 and must preserve this selected Design meaning without importing excluded technology choices.
+The artifact is a realization of accepted meaning, not a second normative source.
+
+Portable self-contained application artifacts, managed shared-Ruleset application realizations, and other environment-specific profiles remain separate future Functional Sets.

@@ -85,13 +85,33 @@ Planning shall produce:
 
 The normative requirements should be the smallest stable set that captures the selected Design meaning and should use conditional obligations where the behavior only becomes consequential for multi-instance applications or coexisting Ruleset states.
 
-## Build Boundary
+## Build Output
 
-Opening FS-002 does not yet assign a Build realization.
+Build shall create one product-owned distributable FS-002 seed-spec artifact under `product/src/`.
 
-A later Planning result may define a distributable conformance artifact or realization profile if doing so carries bounded product meaning.
+The artifact shall contain enough explicit information to identify:
 
-Build must not introduce Git, a corporate chat provider, a portable-file format, a database, or another technology choice merely to complete FS-002 unless later Planning explicitly assigns that choice.
+- ADR as Agent · Dataset · Ruleset;
+- the FS-002 identity;
+- the exact Design revision consumed by FS-002;
+- the complete active FS-002 normative contract;
+- the distinction between canonical authority and derived artifact status; and
+- the absence of a required ADR runtime dependency.
+
+The artifact shall use the same simple project-native JSON seed-spec representation established by FS-001 unless that representation proves unable to preserve FS-002 meaning.
+
+Build shall not introduce Git, a corporate chat provider, a portable application-file profile, a database, or another technology choice merely to realize FS-002.
+
+## Build Validation
+
+Mechanical validation shall verify that:
+
+- the FS-002 seed artifact exists;
+- its ADR, Functional Set, authority, and Design-revision identity are correct;
+- its normative requirements exactly correspond to the canonical FS-002 specification; and
+- Build-classified FS-002 requirements are bound to the seed-spec-artifact task.
+
+Mechanical validation does not establish semantic acceptance.
 
 ## Deferred Realization Profiles
 

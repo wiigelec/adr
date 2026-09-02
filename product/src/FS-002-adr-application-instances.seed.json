@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "artifact_type": "adr-seed-spec",
+  "adr": {
+    "name": "Agent Dataset Ruleset",
+    "abbreviation": "ADR",
+    "components": [
+      "Agent",
+      "Dataset",
+      "Ruleset"
+    ]
+  },
+  "functional_set": "FS-002",
+  "title": "ADR Application Instances and Ruleset Binding",
+  "design_revision": "87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de",
+  "authority": {
+    "status": "derived",
+    "normative": false,
+    "canonical_source": "product/specs/FS-002-adr-application-instances.md"
+  },
+  "runtime_dependency_required": false,
+  "normative_requirements": [
+    {
+      "id": "FS-002-NR-001",
+      "title": "Application Definition and Instance Distinction",
+      "classification": "S",
+      "text": "An ADR-derived application shall distinguish reusable application definition from independently continuing application instances whose committed state is represented by their Datasets."
+    },
+    {
+      "id": "FS-002-NR-002",
+      "title": "Independent Dataset Authority",
+      "classification": "S",
+      "text": "Each application instance shall retain independent Dataset authority for its committed application state."
+    },
+    {
+      "id": "FS-002-NR-003",
+      "title": "Shared Ruleset Governance",
+      "classification": "S",
+      "text": "One application Ruleset may govern multiple independent application instances without merging their Dataset authority."
+    },
+    {
+      "id": "FS-002-NR-004",
+      "title": "Instance-Scoped Transition",
+      "classification": "S",
+      "text": "A proposed or accepted Dataset state transition shall be scoped to the selected application instance unless the derived application's Ruleset explicitly defines a cross-instance operation."
+    },
+    {
+      "id": "FS-002-NR-005",
+      "title": "No Implicit Cross-Instance Authority",
+      "classification": "S",
+      "text": "Shared Ruleset semantics, schemas, storage mechanisms, or Agent access shall not by themselves authorize state transfer, mutation, or committed-state inference between application instances."
+    },
+    {
+      "id": "FS-002-NR-006",
+      "title": "Applicable Ruleset Determinacy",
+      "classification": "S",
+      "text": "When multiple distinguishable Ruleset states may coexist, the derived application shall preserve enough Ruleset identity or traceability to determine which governing semantics apply to the selected Dataset operation."
+    },
+    {
+      "id": "FS-002-NR-007",
+      "title": "No Unnecessary Revision Identifier",
+      "classification": "S",
+      "text": "When only one Ruleset state can govern an application operation, ADR conformance shall not require a separate Ruleset revision identifier merely to satisfy FS-002."
+    },
+    {
+      "id": "FS-002-NR-008",
+      "title": "Physical Co-Location Permitted",
+      "classification": "S",
+      "text": "A derived application may physically co-locate Ruleset and Dataset material while preserving their semantic distinction and authority boundaries."
+    },
+    {
+      "id": "FS-002-NR-009",
+      "title": "Managed Separation Permitted",
+      "classification": "S",
+      "text": "A derived application may realize one separately managed Ruleset authority governing multiple independently stored Dataset instances."
+    },
+    {
+      "id": "FS-002-NR-010",
+      "title": "Consequential Ruleset Evolution",
+      "classification": "S",
+      "text": "When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined."
+    },
+    {
+      "id": "FS-002-NR-011",
+      "title": "No Silent Retroactive Reinterpretation",
+      "classification": "S",
+      "text": "A changed Ruleset shall not silently retroactively reinterpret committed Dataset state unless the derived application's own semantics establish that resulting meaning."
+    },
+    {
+      "id": "FS-002-NR-012",
+      "title": "Agent Session Binding",
+      "classification": "S",
+      "text": "A reasoning operation shall be semantically bound to the applicable Ruleset and relevant current Dataset state of the selected application instance."
+    },
+    {
+      "id": "FS-002-NR-013",
+      "title": "Agent Reuse Does Not Transfer State",
+      "classification": "S",
+      "text": "Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not transfer committed Dataset state between those instances."
+    },
+    {
+      "id": "FS-002-NR-014",
+      "title": "Implementation Independence",
+      "classification": "S",
+      "text": "FS-002 conformance shall not require Git, GitHub, a particular file format, a database, a corporate chat provider, or another realization technology unless a later derived specification explicitly assigns that choice product meaning."
+    },
+    {
+      "id": "FS-002-NR-015",
+      "title": "Seed-Spec Artifact Realization",
+      "classification": "B",
+      "text": "Build shall realize the accepted FS-002 contract as one distributable seed-spec artifact derived from canonical Product Design, Planning, and normative specification state."
+    },
+    {
+      "id": "FS-002-NR-016",
+      "title": "Seed-Spec Artifact Fidelity",
+      "classification": "B",
+      "text": "The FS-002 seed-spec artifact shall preserve the complete active FS-002 normative contract without inventing, weakening, extending, or silently replacing canonical ADR meaning."
+    },
+    {
+      "id": "FS-002-NR-017",
+      "title": "Seed-Spec Artifact Identity and Traceability",
+      "classification": "M",
+      "text": "The FS-002 seed-spec artifact shall identify ADR as Agent \u00b7 Dataset \u00b7 Ruleset, identify itself as derived from FS-002, and record the exact FS-002 Design revision `87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de`."
+    },
+    {
+      "id": "FS-002-NR-018",
+      "title": "Derived Artifact Non-Authority",
+      "classification": "S",
+      "text": "The FS-002 seed-spec artifact shall be treated as a distributable realization of canonical ADR meaning rather than as an independent normative authority."
+    }
+  ]
+}
