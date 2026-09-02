@@ -34,6 +34,9 @@ Agent reasoning is transient. A reasoning operation is bound to the applicable R
 
 - `FS-001` — ADR Core Contract: minimum Agent, Dataset, Ruleset, authority, transition, and seed-spec contract.
 - `FS-002` — ADR Application Instances and Ruleset Binding: application/instance topology, shared Ruleset authority, independent Dataset state, Ruleset binding, and consequential Ruleset evolution.
+- `FS-003` — ADR Application Realization and Initialization: realization/semantic separation, determinate fresh-session initialization, read-only initialization, and provider/packaging independence.
+
+Concrete single-file, multi-file, and provider-specific application assembly belongs to realization tooling such as `adr-app-builder`, not to ADR core semantics.
 
 The exact repo-spec framework source revision used to initialize this repository is recorded in `repo/validation/framework-source.json`.
 

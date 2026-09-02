@@ -192,6 +192,7 @@ This architecture is decomposed into:
 - DP-120 — Dataset Architecture
 - DP-130 — Agent Interaction and State Transition
 - DP-140 — Session Continuity
+- DP-150 — Application Realization and Initialization
 
 DP-110 defines Ruleset meaning and its relationship to CGI.
 
@@ -200,6 +201,20 @@ DP-120 defines Dataset state-machine and committed-authority meaning and its rel
 DP-130 defines how Agent reasoning, Ruleset governance, user input, current Dataset state, and transition acceptance participate in state change.
 
 DP-140 defines continuity across reasoning sessions as an outcome of persistent Dataset state interpreted under the applicable Ruleset.
+
+DP-150 defines application realization and initialization semantics while preserving provider, packaging, encoding, and builder independence.
+
+## Application Realization and Initialization
+
+An ADR-derived application's semantic definition is distinct from any concrete realization used to deliver it to an Agent.
+
+A realization may package Ruleset and Dataset material together, keep them separately managed, or use another arrangement while preserving their semantic roles and authority boundaries.
+
+A fresh reasoning operation is initialized when enough application identity, selected instance identity, applicable Ruleset authority, relevant authoritative Dataset state, and required binding information are available for reasoning to begin under determinate application semantics.
+
+Initialization is not itself a committed Dataset transition. Loading or binding an application realization shall not silently mutate Dataset state unless application-owned governed transition semantics explicitly define and accept such a change.
+
+Provider-specific bootstrap instructions, encodings, file layouts, prompt forms, transport, and builder technologies are realization concerns rather than ADR core meaning.
 
 ## Design Boundary
 
