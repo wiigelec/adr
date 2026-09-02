@@ -9,11 +9,22 @@ depends_on:
 
 ## Purpose
 
-The Dataset is the persistent state machine of an ADR-derived application and the sole authority for committed application state.
+The Dataset is the persistent state machine of an ADR-derived application instance and the sole authority for that instance's committed application state.
 
-It represents the durable current state from which an Agent can understand ongoing application work and to which accepted governed state transitions can be persisted.
+It represents the durable current state from which an Agent can understand ongoing application work for the selected instance and to which accepted governed state transitions can be persisted.
 
 ADR defines the Dataset role and continuity contract. Each ADR-derived application defines its concrete state semantics.
+
+
+## Application-Instance State
+
+A derived application may have multiple independent application instances governed by the same application Ruleset.
+
+Each instance has independent committed Dataset state. The fact that two instances share state vocabulary, schemas, Ruleset semantics, storage technology, or Agent access does not merge their state authority.
+
+A transition accepted for one instance changes that instance's Dataset only, unless the derived application's semantics explicitly define a cross-instance operation.
+
+The physical Dataset of one instance may be one artifact or many artifacts. Dataset identity follows the application's committed-state boundary rather than a required file count or storage layout.
 
 ## Current Application State
 
@@ -81,6 +92,21 @@ The Dataset answers, in application-specific terms, **what is the current commit
 The Ruleset answers, in application-specific terms, **how is that state interpreted and under what semantics may it change?**
 
 The distinction follows meaning rather than storage mechanism, update frequency, or file type.
+
+
+Ruleset and Dataset material may therefore be physically co-located, including within one portable application artifact, without losing their semantic distinction.
+
+Conversely, one separately managed Ruleset authority may govern multiple independently stored Datasets.
+
+## Applicable Ruleset Binding
+
+Dataset state is interpreted under an applicable Ruleset.
+
+When a derived application allows different Ruleset states to coexist, the application must preserve enough identity or traceability to determine which Ruleset semantics govern an affected Dataset operation.
+
+The binding may be intrinsic to a self-contained artifact or explicit when Ruleset and Dataset authority are managed separately.
+
+ADR does not prescribe the binding representation or storage mechanism.
 
 ## SCF — Session Continuity Framework
 

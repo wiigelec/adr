@@ -89,6 +89,49 @@ A derived application may therefore be highly domain-specific while remaining st
 
 ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsibilities and their contracts, not about copying one fixed application schema or runtime.
 
+
+## Application Definition and Application Instances
+
+An ADR-derived application defines reusable application meaning through its Dataset semantics, Ruleset semantics, transition semantics, and required Agent behavior.
+
+A derived application may support one or more **application instances**. An application instance is one independently continuing realization of that application whose committed state is represented by its own Dataset.
+
+Multiple application instances may therefore operate under the same application Ruleset while maintaining independent Dataset state. A state transition in one instance does not alter another instance merely because both are governed by the same Ruleset.
+
+This distinction separates reusable application definition from independently evolving application-instance state without adding a fourth first-class ADR role.
+
+## Ruleset and Dataset Binding
+
+An application instance operates under an applicable Ruleset authority.
+
+When a derived application permits more than one Ruleset revision, release, or other distinguishable Ruleset state to exist, the application must preserve enough identity or traceability to determine which governing semantics apply to a Dataset operation.
+
+The binding mechanism is application-specific. It may be intrinsic because Ruleset and Dataset material are packaged together, or explicit through a reference to separately managed Ruleset authority.
+
+ADR requires semantic determinacy of the applicable Ruleset where that distinction matters; it does not prescribe a version identifier, repository technology, artifact format, or lookup mechanism.
+
+## Physical Realization
+
+Ruleset and Dataset are semantically distinct roles, not mandatory physical containers.
+
+A derived application may realize them in one self-contained artifact, in separately managed artifacts, or through other storage arrangements while preserving their authority boundaries.
+
+A self-contained realization may therefore carry both governed Ruleset semantics and committed Dataset state in one physical file or package. A managed realization may use one shared Ruleset authority across multiple independent Dataset instances.
+
+## Ruleset Evolution and Instance Compatibility
+
+Ruleset semantics may evolve independently from an application instance's Dataset state.
+
+When a Ruleset change can alter the interpretation, validity, or permitted transition of existing Dataset state, the derived application must define whatever compatibility, migration, acceptance, refusal, or recovery semantics are necessary to keep the affected instance well-defined.
+
+ADR does not require one universal migration model. It requires only that consequential Ruleset change not silently reinterpret committed Dataset state without application-owned semantics establishing the resulting meaning.
+
+## Agent Session Binding
+
+A reasoning session operates against an applicable Ruleset and the relevant Dataset state of the selected application instance.
+
+An Agent may serve different application instances across separate reasoning operations, but transient Agent state does not merge or transfer committed state between those instances.
+
 ## Seed Specification Realization
 
 ADR is a specification product rather than an application runtime.

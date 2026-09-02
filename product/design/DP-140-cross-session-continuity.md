@@ -28,6 +28,9 @@ A later Agent session can continue prior application work when it can obtain:
 
 The Agent reasons from that governed condition and may participate in a further proposed state transition.
 
+
+For a derived application with multiple instances, continuity is evaluated independently for the selected application instance. Each instance continues from its own authoritative Dataset state under the applicable shared or instance-specific Ruleset authority.
+
 The continuity loop is therefore:
 
 1. read relevant current authoritative Dataset state,
@@ -63,6 +66,9 @@ The derived application defines what "enough" means for its domain.
 
 A bounded representation must preserve the required semantics and remain traceable to the authoritative Ruleset and Dataset sources it represents.
 
+
+Where multiple Ruleset states may coexist, continuity also requires enough Ruleset identity or traceability to determine which governing semantics apply to the selected Dataset state.
+
 ## Missing Authority
 
 When required current state or governing semantics are unavailable, continuity is underspecified for the affected operation.
@@ -93,6 +99,9 @@ Continuity is an application property rather than the persistence of one particu
 
 A later session may use another Agent instance, model invocation, or compatible reasoning engine if the derived application's semantics permit it.
 
+
+The same Agent implementation may also serve multiple independent application instances across different sessions or operations. That reuse does not carry committed state between instances; each instance derives continuity from its own Dataset authority and applicable Ruleset.
+
 The continuing Agent operates from current Dataset state under the applicable Ruleset rather than inheriting authority merely from being the same conversational process.
 
 ## Failure and Recovery
@@ -108,6 +117,9 @@ Continuity may be disrupted when required state or governing semantics are:
 ADR identifies these as consequential conditions but does not impose universal recovery behavior.
 
 Each derived application defines the success, failure, fallback, or recovery semantics appropriate to its domain.
+
+
+Ruleset evolution can also disrupt continuity when a new governing state changes the interpretation or validity of existing Dataset state. When consequential, the derived application defines compatibility, migration, acceptance, refusal, or recovery semantics before the instance continues under the changed Ruleset.
 
 ## Drift and Hallucination
 

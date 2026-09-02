@@ -66,6 +66,31 @@ A piece of information belongs conceptually to the Dataset when its primary role
 
 A derived application may realize both using the same physical technology without collapsing their semantic distinction.
 
+
+## Shared Ruleset Authority
+
+One application Ruleset may govern multiple independent application instances.
+
+Each instance retains its own Dataset authority while relying on the same reusable application semantics for interpretation and transition governance.
+
+Sharing a Ruleset does not merge Dataset state, create implicit cross-instance authority, or permit a transition in one Dataset to modify another Dataset unless the derived application's Ruleset explicitly defines such cross-instance semantics.
+
+## Applicable Ruleset Identity
+
+When only one governing Ruleset state can apply, no separate revision identity is required by ADR.
+
+When multiple distinguishable Ruleset states may coexist, the derived application must preserve enough Ruleset identity or traceability to determine which semantics govern an affected Dataset operation.
+
+ADR does not prescribe how that identity is represented. A commit identifier, release, artifact identity, embedded Ruleset content, managed-service revision, or other mechanism may realize the relationship when chosen by the derived application.
+
+## Ruleset Evolution
+
+A change to Ruleset semantics can be consequential to existing Dataset state.
+
+Derived-application Design must define compatibility, migration, refusal, recovery, or other semantics when a Ruleset change can alter the meaning or validity of already committed state or the transitions available from that state.
+
+A new Ruleset state does not automatically retroactively redefine earlier committed Dataset meaning unless the application's own semantics establish that behavior.
+
 ## CGI — Chat Governance Infrastructure
 
 **CGI — Chat Governance Infrastructure** is the realization framework aligned with the Ruleset concept.

@@ -28,6 +28,9 @@ The Ruleset establishes how these inputs are interpreted.
 
 The Dataset establishes the authoritative durable current state from which the application is operating.
 
+
+For an application with multiple instances, the Dataset input is the relevant authoritative state of the selected instance, and the Ruleset input is the applicable governing semantics for that instance and operation.
+
 User input introduces new application-relevant information or intent.
 
 The Agent supplies transient reasoning over those inputs.
@@ -55,6 +58,11 @@ Not every Agent operation must propose a state change.
 Not every user input must produce a state change.
 
 Not every proposed state change must be accepted.
+
+
+For applications with multiple instances, a proposed transition is scoped to the selected Dataset instance unless the applicable Ruleset explicitly defines a cross-instance transition.
+
+Shared Ruleset authority does not by itself authorize state transfer, mutation, or inference from one Dataset instance into another.
 
 ## Agent Read
 
@@ -138,6 +146,11 @@ Starting a new Agent session and continuing prior application work both use the 
 - reason from that governed application condition.
 
 A derived application may distinguish initial start, continuation, recovery, refresh, or other modes when those distinctions matter to its product semantics.
+
+
+The same application may initialize or continue different independent instances by binding each reasoning operation to the applicable Ruleset and the selected instance's current Dataset state.
+
+When Ruleset evolution makes the existing Dataset/Ruleset relationship incompatible or ambiguous, the derived application's migration, refusal, recovery, or other application-owned semantics govern whether reasoning and further transition may proceed.
 
 ## Derived-Application Responsibility
 
