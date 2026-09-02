@@ -89,6 +89,20 @@ A derived application may therefore be highly domain-specific while remaining st
 
 ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsibilities and their contracts, not about copying one fixed application schema or runtime.
 
+## Seed Specification Realization
+
+ADR is a specification product rather than an application runtime.
+
+Accepted ADR Functional Sets may be realized as distributable seed-spec artifacts derived from canonical Product Design, Planning, and normative specification state.
+
+A seed-spec artifact exists to carry accepted ADR semantics into the creation or maintenance of ADR-derived applications.
+
+It is not a second normative authority. Canonical ADR Design and Planning remain authoritative within this repository, and the distributable artifact must preserve that accepted meaning without inventing, weakening, or extending it.
+
+A derived application may consume a seed-spec artifact during its own Design, Planning, generation, initialization, or maintenance workflow without retaining ADR or the artifact as a runtime dependency.
+
+ADR does not require one universal artifact encoding or packaging technology unless later Planning assigns one technical meaning for a bounded Functional Set.
+
 ## SCF, SCF Contract Foundation, and CGI
 
 ADR recognizes reusable realization frameworks aligned with the Dataset and Ruleset concepts.

@@ -2,90 +2,87 @@
 
 ## Objective
 
-Translate the selected ADR Design into the smallest stable normative contract that an ADR-derived application must preserve.
-
-The Functional Set is intentionally architecture-level. It specifies semantic responsibilities and boundaries without choosing an application domain, runtime architecture, storage mechanism, prompting system, model provider, or concrete SCF/CGI realization.
+Translate the selected ADR Design into the smallest stable normative contract that an ADR-derived application must preserve, and define the physical realization Build must produce for that contract.
 
 ## Technical Intent
 
-The canonical FS-001 normative specification shall define the minimum contract around four relationships:
+FS-001 has two technical outputs:
 
-1. **Role separation** — Agent, Dataset, and Ruleset remain semantically distinct.
-2. **Authority** — committed application state belongs to the Dataset; transient Agent state does not become authority implicitly.
-3. **Governed transition** — Agent reasoning may produce proposed state, but only a transition accepted under application-owned Ruleset semantics becomes committed Dataset state.
-4. **Derived specialization** — each ADR-derived application supplies the concrete Dataset, Ruleset, transition, and Agent semantics needed by its domain.
+1. the canonical Product Planning and normative specification state that defines the ADR Core Contract; and
+2. one distributable seed-spec artifact generated from that accepted canonical state.
+
+The distributable artifact exists so ADR-derived application workflows can consume the FS-001 contract without depending on this repository's internal lifecycle layout.
+
+## Canonical Authority
+
+Canonical Product Design, Planning, and normative specification files remain authoritative.
+
+The seed-spec artifact is derived output.
+
+It must preserve accepted FS-001 meaning and must not create, alter, weaken, or extend normative semantics.
+
+When the artifact and canonical source disagree, the canonical source controls and the artifact is defective.
+
+## Artifact Boundary
+
+Build shall create one product-owned distributable artifact under the product implementation/output domain selected during Build within existing authorized repository structure.
+
+The artifact shall contain enough explicit information to identify:
+
+- ADR as Agent · Dataset · Ruleset;
+- the FS-001 identity;
+- the exact Design revision consumed by FS-001;
+- the complete active FS-001 normative contract;
+- the distinction between canonical authority and derived artifact status; and
+- the absence of a required ADR runtime dependency.
+
+The artifact may use a simple project-native representation chosen by Build unless a representation choice materially changes meaning.
 
 ## Agent Contract
 
-The Agent is treated as transient reasoning capability.
+The Agent is transient reasoning capability.
 
-FS-001 does not require a particular model, provider, memory mechanism, prompt architecture, or orchestration system.
-
-The implementation must preserve the distinction between transient Agent working state and committed Dataset state. Agent output alone is not sufficient to establish committed application state.
+The artifact must preserve the distinction between transient Agent state and committed Dataset state.
 
 ## Dataset Contract
 
-The Dataset is treated as the persistent state machine and sole authority for committed application state.
+The Dataset is the persistent state machine and sole authority for committed application state.
 
-FS-001 does not prescribe the state schema, serialization, persistence technology, transaction mechanism, or formal state-machine representation.
-
-A derived application must define enough Dataset semantics to determine what constitutes its committed state and what accepted transitions mean.
+The artifact must preserve that committed-state authority without imposing a concrete persistence technology.
 
 ## Ruleset Contract
 
-The Ruleset is treated as the governed source of application interpretation and state-transition semantics.
+The Ruleset is the application-owned source of interpretation and transition-governance semantics.
 
-FS-001 does not prescribe the Ruleset representation or delivery mechanism.
-
-A derived application must define enough Ruleset semantics to govern interpretation of current state, relevant inputs, and transition acceptance.
+The artifact must preserve that role without imposing a concrete Ruleset encoding or delivery mechanism.
 
 ## Transition Contract
 
-The implementation model preserves a semantic boundary between:
+The artifact must preserve the semantic boundary:
 
-- current committed Dataset state;
-- transient reasoning and user input;
-- proposed next state; and
-- accepted next Dataset state.
+`current committed Dataset state + Ruleset + user input + Agent reasoning → proposed next state → governed acceptance → next committed Dataset state`
 
-Acceptance may be automatic, user-mediated, externally validated, multi-step, or otherwise application-specific.
+Acceptance remains application-specific.
 
-FS-001 does not select one mechanism. It requires only that acceptance behavior be grounded in application-owned Ruleset and Dataset semantics rather than invented ad hoc by the Agent or implementation.
+## Bounded Context and Missing Authority
 
-## Bounded Context
+The artifact must preserve:
 
-A derived application may provide bounded representations of Ruleset meaning and Dataset state to the Agent.
+- bounded context fidelity and traceability to governing meaning; and
+- missing required authority as underspecification rather than permission for Agent invention.
 
-The bounded representation must preserve the meaning required for the active operation and remain traceable to the authoritative Ruleset or Dataset source it represents.
+## Derived-Application Consumption
 
-FS-001 does not require complete source loading or prescribe retrieval technology.
+The artifact is intended for use during creation, Design, Planning, generation, initialization, or maintenance of ADR-derived applications.
 
-## Missing Authority
+Consumption of the artifact must not imply a continuing runtime dependency on ADR.
 
-When required governing semantics or committed-state information is unavailable, the operation is semantically underspecified.
+## Build Freedom
 
-The Agent must not use that absence as permission to invent application rules or committed state.
+Build may choose the smallest practicable serialization and generation mechanism that preserves the Plan and normative requirements.
 
-A derived application may define explicit fallback, refusal, recovery, or degraded behavior in later application-specific Design.
+Build shall not introduce a generalized packaging framework, runtime library, code-generation platform, plugin system, or application-specific semantics merely to realize FS-001.
 
-## Product Form
+## Deferred Work
 
-ADR remains a seed specification set.
-
-FS-001 therefore does not require creation of an ADR runtime or a continuing runtime dependency on this repository.
-
-Build for FS-001 must preserve the normative contract and may add only repository state necessary to realize or evaluate that contract without introducing product semantics beyond Design and Planning.
-
-## Deferred Design and Planning
-
-Later Functional Sets may address:
-
-- SCF and SCF Contract Foundation contracts;
-- CGI realization semantics;
-- session-continuity outcomes;
-- state identity, provenance, versioning, conflict, and recovery;
-- authority precedence among user input, Ruleset, Dataset, Agent conclusions, and external evidence;
-- stronger ADR-derived conformance profiles;
-- application-specific realizations.
-
-Those subjects are not implied requirements of FS-001.
+SCF, SCF Contract Foundation, CGI, full continuity behavior, richer conformance profiles, and application-specific realizations remain outside FS-001.

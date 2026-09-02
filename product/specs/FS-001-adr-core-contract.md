@@ -72,7 +72,7 @@ When an Agent receives a bounded representation of Ruleset meaning or Dataset st
 
 When an operation requires governing semantics or committed-state information that is unavailable, ambiguous, or unresolved, the operation shall be treated as semantically underspecified rather than as permission for the Agent to invent application rules or committed state.
 
-### FS-001-NR-013 — Agent Implementation Independence
+### FS-001-NR-013 — Implementation Independence
 
 **Classification: S**
 
@@ -82,4 +82,28 @@ ADR conformance shall not require a particular model provider, prompting techniq
 
 **Classification: S**
 
-An ADR-derived application shall not be required to retain ADR itself as a runtime dependency merely to preserve the FS-001 semantic contract.
+An ADR-derived application shall not be required to retain ADR itself or an ADR seed-spec artifact as a runtime dependency merely to preserve the FS-001 semantic contract.
+
+### FS-001-NR-015 — Seed-Spec Artifact Realization
+
+**Classification: B**
+
+Build shall realize the accepted FS-001 contract as one distributable seed-spec artifact derived from canonical Product Design, Planning, and normative specification state.
+
+### FS-001-NR-016 — Seed-Spec Artifact Fidelity
+
+**Classification: B**
+
+The FS-001 seed-spec artifact shall preserve the complete active FS-001 normative contract without inventing, weakening, extending, or silently replacing canonical ADR meaning.
+
+### FS-001-NR-017 — Seed-Spec Artifact Identity and Traceability
+
+**Classification: M**
+
+The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `54a52705d49d11ee6287470f0562e68172d7075a`.
+
+### FS-001-NR-018 — Derived Artifact Non-Authority
+
+**Classification: S**
+
+The FS-001 seed-spec artifact shall be treated as a distributable realization of canonical ADR meaning rather than as an independent normative authority.
