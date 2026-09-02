@@ -1,7 +1,7 @@
 # FS-001 — ADR Core Contract
 
 functional_set: FS-001
-design_revision: 567c2df37d431f6a7cfba08fb91b85d78e7c1d8b
+design_revision: 4874ac8f288afeb1b45abbdd042eacec6aa081d5
 
 ## Purpose
 
@@ -11,7 +11,7 @@ It selects the core Agent, Dataset, Ruleset, authority, state-transition, and se
 
 ## Selected Design Scope
 
-FS-001 consumes ADR Design at revision `567c2df37d431f6a7cfba08fb91b85d78e7c1d8b` including:
+FS-001 consumes ADR Design at revision `4874ac8f288afeb1b45abbdd042eacec6aa081d5` including:
 
 - DP-100 — ADR Architecture:
   - Agent, Dataset, and Ruleset roles;

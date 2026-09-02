@@ -100,7 +100,7 @@ The FS-001 seed-spec artifact shall preserve the complete active FS-001 normativ
 
 **Classification: M**
 
-The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `54a52705d49d11ee6287470f0562e68172d7075a`.
+The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `4874ac8f288afeb1b45abbdd042eacec6aa081d5`.
 
 ### FS-001-NR-018 — Derived Artifact Non-Authority
 
