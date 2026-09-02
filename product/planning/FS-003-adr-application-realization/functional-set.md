@@ -21,7 +21,7 @@ FS-003 includes:
 - sufficient identity and binding information for determinate fresh-operation initialization;
 - selection of application instance and applicable Ruleset where consequential;
 - authoritative Dataset state as the source of committed application state during initialization;
-- default read-only initialization behavior;
+- initialization without implicit Dataset mutation;
 - preservation of existing transition acceptance semantics after initialization;
 - permission for self-contained and managed realization patterns;
 - provider and packaging independence;
