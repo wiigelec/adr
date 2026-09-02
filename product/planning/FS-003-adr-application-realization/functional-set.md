@@ -1,7 +1,7 @@
 # FS-003 — ADR Application Realization and Initialization
 
 functional_set: FS-003
-design_revision: 3c901f08c1014fcbc014f45aedb3a485f791a9f8
+design_revision: 44d6ca44a408c2d4c79dba95d4dc363400ae1743
 
 ## Purpose
 
@@ -11,7 +11,7 @@ It selects the realization and initialization meaning established by DP-150 whil
 
 ## Selected Design Scope
 
-FS-003 consumes ADR Design at revision `3c901f08c1014fcbc014f45aedb3a485f791a9f8`, including DP-100 through DP-150 as applicable to realization, initialization, authority, instance binding, continuity, and transition semantics.
+FS-003 consumes ADR Design at revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`, including DP-100 through DP-150 as applicable to realization, initialization, authority, instance binding, continuity, and transition semantics.
 
 ## Functional Boundary
 

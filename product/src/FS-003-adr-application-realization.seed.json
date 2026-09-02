@@ -12,7 +12,7 @@
   },
   "functional_set": "FS-003",
   "title": "ADR Application Realization and Initialization",
-  "design_revision": "3c901f08c1014fcbc014f45aedb3a485f791a9f8",
+  "design_revision": "44d6ca44a408c2d4c79dba95d4dc363400ae1743",
   "authority": {
     "status": "derived",
     "normative": false,
@@ -30,7 +30,7 @@
       "id": "FS-003-NR-002",
       "title": "Initialization Determinacy",
       "classification": "S",
-      "text": "A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, and relevant authoritative Dataset state."
+      "text": "A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any application-owned initialization semantics required before ordinary reasoning can proceed."
     },
     {
       "id": "FS-003-NR-003",
@@ -120,7 +120,7 @@
       "id": "FS-003-NR-017",
       "title": "Seed-Spec Artifact Identity and Traceability",
       "classification": "M",
-      "text": "The FS-003 seed-spec artifact shall identify ADR as Agent \u00b7 Dataset \u00b7 Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `3c901f08c1014fcbc014f45aedb3a485f791a9f8`."
+      "text": "The FS-003 seed-spec artifact shall identify ADR as Agent \u00b7 Dataset \u00b7 Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`."
     },
     {
       "id": "FS-003-NR-018",

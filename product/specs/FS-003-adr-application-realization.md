@@ -10,7 +10,7 @@ An ADR-derived application's semantic definition shall remain distinguishable fr
 
 **Classification: S**
 
-A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, and relevant authoritative Dataset state.
+A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any application-owned initialization semantics required before ordinary reasoning can proceed.
 
 ### FS-003-NR-003 — Application Identity
 
@@ -100,7 +100,7 @@ The FS-003 seed-spec artifact shall preserve the complete active FS-003 normativ
 
 **Classification: M**
 
-The FS-003 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `3c901f08c1014fcbc014f45aedb3a485f791a9f8`.
+The FS-003 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`.
 
 ### FS-003-NR-018 — Builder and Generated Artifact Non-Authority
 

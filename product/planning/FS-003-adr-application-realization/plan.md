@@ -36,7 +36,7 @@ Planning shall produce `product/specs/FS-003-adr-application-realization.md`.
 
 ## Build Output
 
-Build shall create one product-owned distributable FS-003 seed-spec artifact under `product/src/`. The artifact shall identify ADR, FS-003, exact Design revision `3c901f08c1014fcbc014f45aedb3a485f791a9f8`, canonical specification source, and complete active normative contract. It shall use the existing JSON seed-spec representation and shall not become a required runtime dependency.
+Build shall create one product-owned distributable FS-003 seed-spec artifact under `product/src/`. The artifact shall identify ADR, FS-003, exact Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`, canonical specification source, and complete active normative contract. It shall use the existing JSON seed-spec representation and shall not become a required runtime dependency.
 
 ## Build Validation
 
