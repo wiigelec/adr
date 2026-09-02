@@ -76,7 +76,7 @@ A reasoning operation shall be semantically bound to the applicable Ruleset and 
 
 **Classification: S**
 
-Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not transfer committed Dataset state between those instances.
+Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset and transition semantics.
 
 ### FS-002-NR-014 — Implementation Independence
 

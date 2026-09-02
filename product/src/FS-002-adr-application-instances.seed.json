@@ -96,7 +96,7 @@
       "id": "FS-002-NR-013",
       "title": "Agent Reuse Does Not Transfer State",
       "classification": "S",
-      "text": "Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not transfer committed Dataset state between those instances."
+      "text": "Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset and transition semantics."
     },
     {
       "id": "FS-002-NR-014",
