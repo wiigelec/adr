@@ -7,24 +7,27 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SPEC = ROOT / "product" / "specs" / "FS-001-adr-core-contract.md"
-ARTIFACT = ROOT / "product" / "src" / "FS-001-adr-core-contract.seed.json"
 MANIFEST = ROOT / "product" / "validation" / "requirement-evaluation.json"
-
-EXPECTED_DESIGN_REVISION = "4874ac8f288afeb1b45abbdd042eacec6aa081d5"
-MECHANICAL_REQUIREMENTS = {
-    "FS-001-NR-015",
-    "FS-001-NR-016",
-    "FS-001-NR-017",
-}
 TASK = "seed-spec-artifact"
 
-REQ_RE = re.compile(
-    r"^### (FS-001-NR-\d{3}) — (.+?)\n\n"
-    r"\*\*Classification: ([MSB])\*\*\n\n"
-    r"(.+?)(?=\n\n### FS-001-NR-|\Z)",
-    re.MULTILINE | re.DOTALL,
-)
+FUNCTIONAL_SETS = {
+    "FS-001": {
+        "spec": ROOT / "product" / "specs" / "FS-001-adr-core-contract.md",
+        "artifact": ROOT / "product" / "src" / "FS-001-adr-core-contract.seed.json",
+        "design_revision": "4874ac8f288afeb1b45abbdd042eacec6aa081d5",
+        "title": "ADR Core Contract",
+        "requirement_count": 18,
+        "mechanical_requirements": {"FS-001-NR-015", "FS-001-NR-016", "FS-001-NR-017"},
+    },
+    "FS-002": {
+        "spec": ROOT / "product" / "specs" / "FS-002-adr-application-instances.md",
+        "artifact": ROOT / "product" / "src" / "FS-002-adr-application-instances.seed.json",
+        "design_revision": "87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de",
+        "title": "ADR Application Instances and Ruleset Binding",
+        "requirement_count": 18,
+        "mechanical_requirements": {"FS-002-NR-015", "FS-002-NR-016", "FS-002-NR-017"},
+    },
+}
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}", file=sys.stderr)
@@ -38,57 +41,67 @@ def load_json(path: Path) -> dict:
     except json.JSONDecodeError as exc:
         fail(f"invalid JSON in {path.relative_to(ROOT)}: {exc}")
 
-def parse_spec() -> list[dict[str, str]]:
+def parse_spec(fs_id: str, path: Path, expected_count: int) -> list[dict[str, str]]:
     try:
-        text = SPEC.read_text(encoding="utf-8")
+        text = path.read_text(encoding="utf-8")
     except FileNotFoundError:
-        fail(f"missing file: {SPEC.relative_to(ROOT)}")
+        fail(f"missing file: {path.relative_to(ROOT)}")
+
+    req_re = re.compile(
+        rf"^### ({re.escape(fs_id)}-NR-\d{{3}}) — (.+?)\n\n"
+        r"\*\*Classification: ([MSB])\*\*\n\n"
+        r"(.+?)(?=\n\n### [A-Z]+-\d+-NR-|\Z)",
+        re.MULTILINE | re.DOTALL,
+    )
 
     reqs = []
-    for match in REQ_RE.finditer(text):
+    for match in req_re.finditer(text):
         reqs.append({
             "id": match.group(1),
             "title": match.group(2).strip(),
             "classification": match.group(3),
             "text": match.group(4).strip(),
         })
-    if len(reqs) != 18:
-        fail(f"expected 18 FS-001 normative requirements, found {len(reqs)}")
+
+    if len(reqs) != expected_count:
+        fail(f"{fs_id}: expected {expected_count} normative requirements, found {len(reqs)}")
     if len({r["id"] for r in reqs}) != len(reqs):
-        fail("duplicate FS-001 normative requirement identity")
+        fail(f"{fs_id}: duplicate normative requirement identity")
     return reqs
 
-def main() -> int:
-    spec_reqs = parse_spec()
-    artifact = load_json(ARTIFACT)
-    manifest = load_json(MANIFEST)
+def validate_artifact(fs_id: str, cfg: dict) -> None:
+    spec_reqs = parse_spec(fs_id, cfg["spec"], cfg["requirement_count"])
+    artifact = load_json(cfg["artifact"])
 
     if artifact.get("schema_version") != 1:
-        fail("artifact schema_version must be 1")
+        fail(f"{fs_id}: artifact schema_version must be 1")
     if artifact.get("artifact_type") != "adr-seed-spec":
-        fail("artifact_type must be adr-seed-spec")
+        fail(f"{fs_id}: artifact_type must be adr-seed-spec")
     if artifact.get("adr") != {
         "name": "Agent Dataset Ruleset",
         "abbreviation": "ADR",
         "components": ["Agent", "Dataset", "Ruleset"],
     }:
-        fail("ADR identity is incorrect")
-    if artifact.get("functional_set") != "FS-001":
-        fail("artifact functional_set must be FS-001")
-    if artifact.get("design_revision") != EXPECTED_DESIGN_REVISION:
-        fail("artifact Design revision is incorrect")
+        fail(f"{fs_id}: ADR identity is incorrect")
+    if artifact.get("functional_set") != fs_id:
+        fail(f"{fs_id}: artifact functional_set is incorrect")
+    if artifact.get("title") != cfg["title"]:
+        fail(f"{fs_id}: artifact title is incorrect")
+    if artifact.get("design_revision") != cfg["design_revision"]:
+        fail(f"{fs_id}: artifact Design revision is incorrect")
     if artifact.get("authority") != {
         "status": "derived",
         "normative": False,
-        "canonical_source": "product/specs/FS-001-adr-core-contract.md",
+        "canonical_source": str(cfg["spec"].relative_to(ROOT)),
     }:
-        fail("artifact authority declaration is incorrect")
+        fail(f"{fs_id}: artifact authority declaration is incorrect")
     if artifact.get("runtime_dependency_required") is not False:
-        fail("artifact must declare runtime_dependency_required false")
-
+        fail(f"{fs_id}: artifact must declare runtime_dependency_required false")
     if artifact.get("normative_requirements") != spec_reqs:
-        fail("artifact normative contract does not exactly match canonical FS-001 specification")
+        fail(f"{fs_id}: artifact normative contract does not exactly match canonical specification")
 
+def validate_manifest() -> None:
+    manifest = load_json(MANIFEST)
     if manifest.get("version") != 1:
         fail("manifest version must be 1")
     bindings = manifest.get("bindings")
@@ -105,13 +118,21 @@ def main() -> int:
             fail(f"duplicate manifest binding: {req}")
         seen[req] = tasks
 
-    if set(seen) != MECHANICAL_REQUIREMENTS:
-        fail("manifest must bind exactly FS-001-NR-015, FS-001-NR-016, and FS-001-NR-017")
+    expected = set()
+    for cfg in FUNCTIONAL_SETS.values():
+        expected.update(cfg["mechanical_requirements"])
+
+    if set(seen) != expected:
+        fail(f"manifest must bind exactly active mechanical requirements: {sorted(expected)}")
     for req, tasks in seen.items():
         if tasks != [TASK]:
             fail(f"{req} must bind exactly to {TASK}")
 
-    print("PASS: FS-001 seed-spec artifact exists, is traceable, and exactly preserves the canonical normative contract.")
+def main() -> int:
+    for fs_id, cfg in FUNCTIONAL_SETS.items():
+        validate_artifact(fs_id, cfg)
+    validate_manifest()
+    print("PASS: FS-001 and FS-002 seed-spec artifacts exist, are traceable, and exactly preserve their canonical normative contracts.")
     return 0
 
 if __name__ == "__main__":
