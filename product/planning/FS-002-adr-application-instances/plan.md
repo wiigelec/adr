@@ -75,7 +75,7 @@ FS-002 shall not prescribe one universal migration algorithm or versioning techn
 
 A reasoning operation shall be semantically bound to the applicable Ruleset and relevant current Dataset state of the selected application instance.
 
-Agent reuse across instances shall not transfer committed state between them.
+Agent reuse across instances shall not by itself transfer committed state or create cross-instance state authority. Cross-instance state operations remain governed by explicit application-owned Ruleset and transition semantics.
 
 ## Planned Normative Output
 
@@ -109,7 +109,7 @@ Mechanical validation shall verify that:
 - the FS-002 seed artifact exists;
 - its ADR, Functional Set, authority, and Design-revision identity are correct;
 - its normative requirements exactly correspond to the canonical FS-002 specification; and
-- Build-classified FS-002 requirements are bound to the seed-spec-artifact task.
+- mechanically evaluated FS-002 requirements are bound to the seed-spec-artifact task.
 
 Mechanical validation does not establish semantic acceptance.
 
