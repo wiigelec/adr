@@ -24,6 +24,18 @@ Validation does not create Design meaning or normative requirements.
 
 Closed architectural boundaries are default-deny. Do not add new direct children or files where the accepted architecture does not allow them.
 
+## ADR product boundaries
+
+ADR means Agent · Dataset · Ruleset.
+
+Do not collapse an ADR-derived application definition into one application instance. One application Ruleset may govern multiple independent application instances, each with its own authoritative Dataset state.
+
+Do not infer cross-instance state authority from shared Ruleset, schema, storage, or Agent access. A transition is instance-scoped unless accepted Product Design and Planning explicitly define cross-instance semantics.
+
+Ruleset and Dataset remain semantically distinct even when physically co-located. Do not introduce Git, a file format, a chat provider, or another realization technology as ADR core meaning unless Product Design or Planning explicitly assigns that technology product meaning.
+
+When multiple distinguishable Ruleset states may coexist, preserve the applicable Ruleset identity or traceability required by accepted Product Design and Planning. Do not silently reinterpret existing Dataset state under changed Ruleset semantics.
+
 ## Build discipline
 
 Consume reviewed Design and Planning. Prefer the simplest implementation that preserves their meaning and satisfies applicable normative requirements.
