@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SPEC = ROOT / "product" / "specs" / "FS-001-adr-core-contract.md"
+ARTIFACT = ROOT / "product" / "src" / "FS-001-adr-core-contract.seed.json"
+MANIFEST = ROOT / "product" / "validation" / "requirement-evaluation.json"
+
+EXPECTED_DESIGN_REVISION = "4874ac8f288afeb1b45abbdd042eacec6aa081d5"
+MECHANICAL_REQUIREMENTS = {
+    "FS-001-NR-015",
+    "FS-001-NR-016",
+    "FS-001-NR-017",
+}
+TASK = "seed-spec-artifact"
+
+REQ_RE = re.compile(
+    r"^### (FS-001-NR-\d{3}) — (.+?)\n\n"
+    r"\*\*Classification: ([MSB])\*\*\n\n"
+    r"(.+?)(?=\n\n### FS-001-NR-|\Z)",
+    re.MULTILINE | re.DOTALL,
+)
+
+def fail(message: str) -> None:
+    print(f"FAIL: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+def load_json(path: Path) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        fail(f"missing file: {path.relative_to(ROOT)}")
+    except json.JSONDecodeError as exc:
+        fail(f"invalid JSON in {path.relative_to(ROOT)}: {exc}")
+
+def parse_spec() -> list[dict[str, str]]:
+    try:
+        text = SPEC.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        fail(f"missing file: {SPEC.relative_to(ROOT)}")
+
+    reqs = []
+    for match in REQ_RE.finditer(text):
+        reqs.append({
+            "id": match.group(1),
+            "title": match.group(2).strip(),
+            "classification": match.group(3),
+            "text": match.group(4).strip(),
+        })
+    if len(reqs) != 18:
+        fail(f"expected 18 FS-001 normative requirements, found {len(reqs)}")
+    if len({r["id"] for r in reqs}) != len(reqs):
+        fail("duplicate FS-001 normative requirement identity")
+    return reqs
+
+def main() -> int:
+    spec_reqs = parse_spec()
+    artifact = load_json(ARTIFACT)
+    manifest = load_json(MANIFEST)
+
+    if artifact.get("schema_version") != 1:
+        fail("artifact schema_version must be 1")
+    if artifact.get("artifact_type") != "adr-seed-spec":
+        fail("artifact_type must be adr-seed-spec")
+    if artifact.get("adr") != {
+        "name": "Agent Dataset Ruleset",
+        "abbreviation": "ADR",
+        "components": ["Agent", "Dataset", "Ruleset"],
+    }:
+        fail("ADR identity is incorrect")
+    if artifact.get("functional_set") != "FS-001":
+        fail("artifact functional_set must be FS-001")
+    if artifact.get("design_revision") != EXPECTED_DESIGN_REVISION:
+        fail("artifact Design revision is incorrect")
+    if artifact.get("authority") != {
+        "status": "derived",
+        "normative": False,
+        "canonical_source": "product/specs/FS-001-adr-core-contract.md",
+    }:
+        fail("artifact authority declaration is incorrect")
+    if artifact.get("runtime_dependency_required") is not False:
+        fail("artifact must declare runtime_dependency_required false")
+
+    if artifact.get("normative_requirements") != spec_reqs:
+        fail("artifact normative contract does not exactly match canonical FS-001 specification")
+
+    if manifest.get("version") != 1:
+        fail("manifest version must be 1")
+    bindings = manifest.get("bindings")
+    if not isinstance(bindings, list):
+        fail("manifest bindings must be a list")
+
+    seen = {}
+    for binding in bindings:
+        if not isinstance(binding, dict):
+            fail("manifest binding must be an object")
+        req = binding.get("requirement")
+        tasks = binding.get("tasks")
+        if req in seen:
+            fail(f"duplicate manifest binding: {req}")
+        seen[req] = tasks
+
+    if set(seen) != MECHANICAL_REQUIREMENTS:
+        fail("manifest must bind exactly FS-001-NR-015, FS-001-NR-016, and FS-001-NR-017")
+    for req, tasks in seen.items():
+        if tasks != [TASK]:
+            fail(f"{req} must bind exactly to {TASK}")
+
+    print("PASS: FS-001 seed-spec artifact exists, is traceable, and exactly preserves the canonical normative contract.")
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
