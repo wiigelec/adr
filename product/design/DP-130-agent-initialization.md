@@ -1,91 +1,123 @@
 ---
 doc_id: DP-130
-title: Agent Initialization
+title: Agent Interaction and State Transition
 depends_on:
   - DP-100
   - DP-110
   - DP-120
 ---
 
-# Agent Initialization
+# Agent Interaction and State Transition
 
 ## Purpose
 
-Agent initialization establishes the relationship by which AI reasoning begins or resumes using both governed application context and relevant persistent state.
+The Agent is the reasoning engine that operates over governed application semantics and current persistent state.
 
-Initialization is the first explicit composition point among ADR's three primary concepts.
+This Design defines the abstract interaction through which Ruleset, Dataset, user input, and Agent reasoning can produce a governed application state transition.
 
-## Initialization Inputs
+## Reasoning Inputs
 
-Reasoning depends on two semantically distinct inputs:
+An Agent reasoning operation may consume:
 
-- governed context from the ruleset,
-- relevant persistent state from the dataset.
+- applicable Ruleset semantics,
+- relevant current Dataset state,
+- user input,
+- other application-authorized information.
 
-Both contribute to a coherent reasoning environment.
+The Ruleset establishes how these inputs are interpreted.
 
-Context without state may preserve application meaning while losing continuity of work.
+The Dataset establishes the durable current state from which the application is operating.
 
-State without governed context may preserve facts while losing the intended interpretation and boundaries under which they should be reasoned about.
+User input introduces new application-relevant information or intent.
 
-ADR therefore treats their composition as a product concern.
+The Agent supplies reasoning over those inputs.
+
+## Abstract Transition Model
+
+ADR models the central interaction as:
+
+`current Dataset state + Ruleset + user input + Agent reasoning → next Dataset state`
+
+This is a semantic relationship rather than a required implementation pipeline.
+
+Not every Agent operation must produce a state change.
+
+Not every user input must produce a state change.
+
+When a state change does occur, the resulting transition is governed by application-specific Ruleset semantics and becomes meaningful only according to the derived application's Dataset semantics.
+
+## Agent Read
+
+The Agent may read a representation of current Dataset state sufficient for the reasoning operation.
+
+The Agent may also receive a bounded representation of applicable Ruleset semantics.
+
+ADR does not require the complete Dataset or complete Ruleset to be placed directly into model context.
+
+Derived applications may use projections, retrieval, context construction, tools, or other mechanisms while preserving the governing semantics and current-state meaning.
+
+## Agent Reasoning
+
+Agent reasoning may:
+
+- interpret user input,
+- inspect or analyze current state,
+- derive conclusions,
+- identify candidate actions,
+- propose or determine state changes,
+- explain or communicate application results.
+
+ADR does not define a universal reasoning algorithm.
+
+The reasoning engine remains subject to the application's Ruleset and state semantics.
+
+## Agent Write
+
+An Agent output is not automatically a Dataset mutation.
+
+A state modification occurs only when the derived application's semantics treat the result as a valid governed transition.
+
+This distinction allows applications to separate:
+
+- reasoning from persistence,
+- proposals from accepted changes,
+- transient intermediate work from durable application state.
+
+The exact acceptance mechanism is application-specific.
+
+## Ruleset Governance
+
+Ruleset semantics govern the Agent's interpretation of current state and the validity of transitions.
+
+This includes whatever application-specific authority, constraints, transition conditions, or interpretation rules the derived application defines.
+
+CGI provides the Ruleset-side realization foundation for applying this governance to Agent interaction.
+
+## Dataset Persistence
+
+When a valid state transition occurs, the next Dataset state becomes the durable application state used by subsequent reasoning.
+
+SCF provides the Dataset-side realization foundation for maintaining that continuity across sessions.
 
 ## Initialization and Continuation
 
-Initialization includes both starting a new reasoning session and restoring enough context and state for a later session to continue prior work.
+Starting a new Agent session and continuing prior application work both use the same foundational relationship:
 
-ADR does not yet require these to be implemented as identical operations.
+- establish applicable Ruleset semantics,
+- obtain relevant current Dataset state,
+- reason from that governed application condition.
 
-Further Design may distinguish initial start, resumption, recovery, refresh, or other modes if those distinctions materially affect product meaning.
+A derived application may distinguish initial start, continuation, recovery, refresh, or other modes when those distinctions matter to its product semantics.
 
-## Bounded Inputs
+## Derived-Application Responsibility
 
-The agent does not necessarily consume the complete ruleset or complete dataset.
+ADR defines the interaction contract among Agent, Dataset, Ruleset, and user input.
 
-A derived application may provide bounded projections selected for the current reasoning task.
+Each ADR-derived application defines the concrete semantics for:
 
-The bounded form must remain sufficient to preserve the intended governed context and relevant state.
-
-The criteria for sufficiency are not yet fully defined and remain a Design concern.
-
-## Consistency
-
-Initialization may encounter context and state that are stale, incomplete, invalid, or mutually inconsistent.
-
-ADR recognizes these as consequential semantic conditions.
-
-This Design does not define automatic precedence, repair, rejection, degradation, or fallback behavior. Those outcomes require further Design rather than being inferred from implementation convenience.
-
-## Runtime Independence
-
-ADR does not prescribe how initialization is performed.
-
-Possible realizations may use prompting, retrieval, context assembly, tool calls, agent frameworks, generated instructions, provider-specific mechanisms, or other techniques.
-
-No particular mechanism defines ADR meaning.
-
-## Relationship to Continuity
-
-Agent initialization supplies the immediate reasoning state consumed by cross-session continuity.
-
-DP-140 depends on initialization being able to reconstruct enough governed context and relevant persistent state for coherent continuation.
-
-Initialization itself does not define whether continuity succeeded over time; it defines the composition needed to make that outcome possible.
-
-## Design Questions
-
-Further Design may need to resolve:
-
-- minimum sufficient initialization content,
-- whether initialization and continuation have distinct semantics,
-- required behavior for missing context or state,
-- required behavior for stale or conflicting inputs,
-- how initialization validity is observed,
-- whether the agent may proceed in a degraded mode,
-- what guarantees are required before reasoning begins.
-
-## Planning Boundary
-
-Planning may select concrete initialization behavior only from sufficiently developed Design.
-
-Provider APIs, prompt construction, retrieval algorithms, token budgeting, and orchestration remain implementation concerns unless Design later assigns them product-level meaning.
+- what the Agent may read,
+- what counts as a valid transition,
+- when reasoning results become durable state,
+- what authority user input carries,
+- how invalid or conflicting transitions are handled,
+- what Agent behavior is required by the domain.

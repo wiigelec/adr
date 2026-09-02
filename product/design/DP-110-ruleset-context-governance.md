@@ -1,96 +1,113 @@
 ---
 doc_id: DP-110
-title: Ruleset Context Governance
+title: Ruleset Architecture
 depends_on:
   - DP-100
 ---
 
-# Ruleset Context Governance
+# Ruleset Architecture
 
 ## Purpose
 
-The ruleset defines governed application context for AI reasoning.
+The Ruleset defines the governed application semantics under which an Agent interprets input, reasons about current Dataset state, and participates in application state transitions.
 
-Its role is to make the intended application context explicit enough that reasoning is bounded by product-owned meaning rather than relying on unconstrained inference or incidental conversational context.
+Within ADR, Ruleset is an abstract product role. Each ADR-derived application defines the concrete Ruleset semantics appropriate to its domain.
 
-## Governed Context
+## Application Semantics
 
-Governed context is the application meaning that establishes how the reasoning engine should understand the domain in which it is operating.
+The Ruleset establishes the meaning necessary for the Agent to operate within the intended application.
 
-The ruleset may contain or represent context such as application concepts, relationships, constraints, operating guidance, interpretation rules, or other durable context needed for reasoning.
+That meaning may include:
 
-The exact content model is not fixed here. What matters at this level is that the context is explicit, application-owned, and distinguishable from transient inference.
+- domain concepts and relationships,
+- interpretation rules,
+- constraints,
+- permitted or prohibited behavior,
+- state-transition conditions,
+- authority rules,
+- application-specific operating guidance.
 
-## Ruleset and Dataset Boundary
+ADR does not require every derived application to represent these concerns in the same form.
 
-Ruleset context and dataset state are distinct concerns.
+The defining property is semantic: the Ruleset is the governed source of application meaning used to interpret input and state.
 
-The ruleset establishes the context within which information is interpreted.
+## Governance of State Transition
 
-The dataset carries relevant persistent state describing the application or ongoing work.
+The Dataset represents current application state, but the Ruleset establishes the semantics under which that state is interpreted and changed.
 
-Some information may appear capable of fitting either concern. ADR does not resolve that boundary by storage form, file type, update frequency, or implementation convenience. The semantic role of the information determines where it belongs.
+A state transition is therefore not valid merely because an Agent can produce a different value.
 
-When that semantic role is consequential and unclear, the distinction remains a Design decision rather than an implementation inference.
+The transition must remain consistent with the application semantics established by the Ruleset.
 
-## Relationship to Reasoning
+The exact meaning of validity is application-specific and is defined by the ADR-derived application.
 
-The reasoning engine is initialized or continued within governed context.
+## User Input and Agent Reasoning
 
-ADR does not require the agent to consume a complete ruleset directly. A derived application may construct bounded context, retrieve relevant material, project a subset, transform representations, or use another mechanism.
+User input and Agent reasoning may both affect the next application state.
 
-Any such mechanism should preserve the ruleset's governing meaning rather than silently replacing it with implementation-derived assumptions.
+The Ruleset governs how those influences are interpreted.
 
-## Authority and Interpretation
+User input may introduce commands, decisions, corrections, observations, or other application-specific information.
 
-The ruleset is an application-owned source of context.
+Agent reasoning may derive conclusions, transformations, classifications, proposed actions, or other application-specific results.
 
-A derived application therefore needs a coherent way to distinguish governed ruleset meaning from:
+Neither user input nor Agent reasoning independently replaces the Ruleset as the governing application semantics.
 
-- model prior knowledge,
-- conversational accidents,
-- stale context,
-- inferred context not established by the application,
-- persisted application state that belongs to the dataset.
+## Relationship to Dataset
 
-Exact authority representation, precedence, conflict handling, and validation semantics remain unresolved until further Design establishes them.
+Ruleset and Dataset have distinct roles:
 
-## Independence from Runtime Form
+- Ruleset defines how the application is understood and governed.
+- Dataset represents the application's current persistent state.
 
-Ruleset governance is independent of a particular encoding or loading mechanism.
+A piece of information belongs conceptually to the Ruleset when its primary role is to define application meaning or governance.
 
-ADR does not presently select:
+A piece of information belongs conceptually to the Dataset when its primary role is to represent current persistent application state.
 
-- file formats,
-- schemas,
-- prompt templates,
-- retrieval systems,
-- context-window construction,
-- policy languages,
-- databases,
-- runtime services.
+A derived application may realize both using the same physical technology without collapsing their semantic distinction.
 
-Those choices may differ among derived applications while preserving the same product meaning.
+## CGI — Chat Governance Infrastructure
 
-## Cross-Cutting Perspective
+**CGI — Chat Governance Infrastructure** is the realization framework aligned with the Ruleset concept.
 
-CGI is the perspective most directly associated with ruleset context governance and the relationship between governed context and reasoning.
+CGI provides a reusable foundation for expressing and applying governed application context and Ruleset semantics to Agent reasoning.
 
-CGI remains cross-cutting. It does not create a separate product domain merely by naming this perspective.
+CGI is not itself the concrete Ruleset of every ADR-derived application.
 
-## Design Questions
+A derived application uses or specializes CGI to define the rules, context, constraints, and interpretation semantics specific to that application.
 
-Further Design may need to resolve:
+CGI may be specified without requiring a particular model provider, prompt format, retrieval system, or runtime framework.
 
-- the semantic boundary between ruleset context and dataset state,
-- what constitutes authoritative ruleset meaning,
-- how conflicting or stale context is recognized,
-- when complete context versus bounded context is sufficient,
-- what observable behavior demonstrates that reasoning remained within governed context,
-- whether CGI eventually contains independently meaningful concepts that justify further decomposition.
+## Bounded Context
 
-## Planning Boundary
+An Agent need not receive every Ruleset artifact in full for every reasoning operation.
 
-Planning may specify concrete ruleset requirements only from reviewed Design meaning.
+A derived application may construct a bounded representation of applicable Ruleset meaning.
 
-Representation, validation, projection, retrieval, and runtime mechanics should not be selected merely to fill an unresolved semantic gap.
+Whatever mechanism is used, the resulting reasoning context must preserve the application semantics required for the current operation.
+
+The method of context construction is not itself part of the abstract Ruleset definition unless a derived application gives that method product-level meaning.
+
+## Authority
+
+A Ruleset is an application-owned source of governed semantics.
+
+Derived-application Design may need to establish how Ruleset authority interacts with:
+
+- user input,
+- Agent-derived conclusions,
+- Dataset state,
+- external evidence,
+- conflicting or stale governing material.
+
+ADR establishes that such authority relationships are consequential but does not impose one universal precedence model on all derived applications.
+
+## Derived-Application Responsibility
+
+Each ADR-derived application defines the Ruleset semantics required by its domain.
+
+ADR supplies the architectural role and contract.
+
+CGI supplies a reusable realization foundation.
+
+The derived application supplies the actual application meaning.

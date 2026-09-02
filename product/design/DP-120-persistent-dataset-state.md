@@ -1,101 +1,132 @@
 ---
 doc_id: DP-120
-title: Persistent Dataset State
+title: Dataset Architecture
 depends_on:
   - DP-100
 ---
 
-# Persistent Dataset State
+# Dataset Architecture
 
 ## Purpose
 
-The dataset provides persistent application and session state that remains available beyond a single reasoning session.
+The Dataset is the persistent state machine of an ADR-derived application.
 
-Its role is to preserve information needed for later initialization, continuation, and coherent progress without depending on conversational memory alone.
+It represents the durable current state from which an Agent can understand ongoing application work and to which governed state transitions can be persisted.
 
-## Persistent State
+ADR defines the Dataset role and continuity contract. Each ADR-derived application defines its concrete state semantics.
 
-Dataset state represents relevant information about the application, its ongoing work, or its prior reasoning activity that must survive a reasoning-session boundary.
+## Current Application State
 
-Persistence is a semantic property here: information remains available for later use.
+The Dataset represents application state that must remain meaningful beyond a single Agent reasoning session.
 
-ADR does not equate persistence with any particular database, file format, storage service, serialization, or transaction model.
+Current state may describe any application-specific facts necessary to continue the work, such as:
+
+- current objects and their relationships,
+- progress,
+- decisions,
+- statuses,
+- accumulated results,
+- unresolved work,
+- application-specific control state.
+
+These examples are illustrative rather than mandatory.
+
+What constitutes state is determined by the derived application's semantics.
+
+## Persistent State Machine
+
+The Dataset is a state machine in the semantic sense.
+
+At any relevant point, the application has a current Dataset state.
+
+A governed interaction may produce a transition from that state to a next state.
+
+The next state becomes durable application state and is available to later reasoning sessions.
+
+ADR does not require a particular formal state-machine notation, transition engine, database, event model, or serialization.
+
+## State Transition
+
+A Dataset transition may be influenced by:
+
+- current Dataset state,
+- applicable Ruleset semantics,
+- user input,
+- Agent reasoning.
+
+The Dataset does not independently determine whether a transition is valid.
+
+The Ruleset governs application interpretation and transition validity.
+
+The Agent participates in reasoning that may determine or propose the next state.
+
+The derived application defines the exact state-transition semantics.
 
 ## Dataset and Ruleset Boundary
 
-Dataset state is distinct from ruleset context.
+Dataset and Ruleset remain semantically distinct.
 
-The dataset records state about the application or work.
+The Dataset answers, in application-specific terms, **what is the current durable state?**
 
-The ruleset establishes the governed context used to interpret and reason about that state.
+The Ruleset answers, in application-specific terms, **how is that state interpreted and under what semantics may it change?**
 
-The distinction follows semantic role rather than physical representation. A value does not become ruleset material merely because it changes rarely, and it does not become dataset state merely because it is stored in a database.
+The distinction follows meaning rather than storage mechanism, update frequency, or file type.
 
-When the role is ambiguous and materially affects behavior, further Design is required.
+## SCF — Session Continuity Framework
 
-## State Across Sessions
+**SCF — Session Continuity Framework / SCF Contract Foundations** is the realization framework aligned with the Dataset concept.
 
-A later reasoning session may need only a relevant portion of persisted state rather than the entire dataset.
+SCF provides reusable foundations for persistent state, state continuity, and the contracts required to carry meaningful application state across Agent sessions.
 
-ADR therefore does not require complete-state loading.
+SCF is not itself the concrete Dataset semantics of every ADR-derived application.
 
-A derived application may select, retrieve, project, summarize, or otherwise construct the state made available to reasoning, provided the result preserves the state meaning required for the intended continuation.
+A derived application uses or specializes SCF to define what its state means, what must persist, and how that state participates in continuity.
+
+SCF may be specified independently of a particular persistence technology.
+
+## Reading State
+
+An Agent may read relevant current Dataset state when reasoning.
+
+ADR does not require every reasoning operation to consume the complete Dataset.
+
+A derived application may expose a relevant projection or representation of current state when that representation preserves the semantics necessary for the operation.
+
+The Dataset remains the durable application-state authority even when only a bounded representation is supplied to the Agent.
+
+## Modifying State
+
+Agent reasoning may result in modification of Dataset state.
+
+The modification is governed by the applicable Ruleset and may incorporate user input.
+
+The fact that the Agent generated an output does not by itself make that output persistent application state.
+
+A derived application defines when reasoning results constitute a valid state transition and how the next state becomes authoritative.
 
 ## State Evolution
 
-Persistent state is expected to evolve as application work progresses.
+Derived-application Design may define semantics for:
 
-The exact semantics for:
-
-- identity,
+- state identity,
+- state validity,
+- transition validity,
 - versioning,
-- mutation,
-- validation,
-- retention,
-- provenance,
-- conflict detection,
-- stale-state handling,
+- conflict handling,
+- stale state,
 - recovery,
+- provenance,
+- retention,
+- partial or bounded state views.
 
-are not established by this Design.
+ADR does not impose one universal model for those concerns.
 
-These are not assumed to be implementation-only concerns. Where they materially change the meaning of continuity or state, they require further Design before Planning fixes concrete behavior.
+## Derived-Application Responsibility
 
-## Independence from Storage Technology
+Each ADR-derived application defines its Dataset semantics and state-transition model.
 
-ADR does not prescribe:
+ADR supplies the architectural role and continuity contract.
 
-- relational or document databases,
-- files,
-- object stores,
-- vector stores,
-- event logs,
-- memory services,
-- synchronization systems,
-- transaction mechanisms.
+SCF supplies a reusable realization foundation.
 
-Different derived applications may realize persistent state differently while conforming to the same semantic role.
-
-## Cross-Cutting Perspective
-
-SCF is the perspective most directly associated with persistent state and its use across reasoning sessions.
-
-SCF remains cross-cutting and does not independently define a product domain at this level.
-
-## Design Questions
-
-Further Design may need to resolve:
-
-- state identity and lifecycle,
-- the ruleset/dataset information boundary,
-- how state validity is determined,
-- how stale or conflicting state affects reasoning,
-- what state must be carried forward,
-- when a bounded projection is sufficient,
-- whether SCF eventually contains independently meaningful concepts that justify further decomposition.
-
-## Planning Boundary
-
-Planning may define concrete state requirements only where Design provides sufficient intended meaning.
-
-Storage and mutation mechanisms should not be used to invent missing state semantics.
+The derived application supplies the actual application state model.

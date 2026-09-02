@@ -1,6 +1,6 @@
 ---
 doc_id: DP-140
-title: Cross-Session Continuity
+title: Session Continuity
 depends_on:
   - DP-100
   - DP-110
@@ -8,98 +8,107 @@ depends_on:
   - DP-130
 ---
 
-# Cross-Session Continuity
+# Session Continuity
 
 ## Purpose
 
-Cross-session continuity is ADR's end-to-end product outcome.
+Session continuity is the ability of an ADR-derived application to preserve coherent application operation across separate Agent reasoning sessions.
 
-A later reasoning session can regain enough governed application context and relevant persistent state to continue prior application work coherently.
+Continuity is grounded in persistent Dataset state interpreted under the applicable Ruleset.
+
+It does not require the prior chat transcript to function as the application's authoritative memory.
 
 ## Continuity Model
 
-Continuity depends on the relationship established by the preceding Design:
+A later Agent session can continue prior application work when it can obtain:
 
-1. the ruleset establishes governed application context,
-2. the dataset preserves relevant persistent state,
-3. initialization composes context and state for reasoning,
-4. a later reasoning session resumes work using that composition.
+- applicable Ruleset semantics,
+- relevant current Dataset state,
+- any new user input or other application-authorized information needed for the current operation.
 
-Continuity therefore spans session boundaries without treating the prior conversation itself as the sole source of memory.
+The Agent reasons from that governed condition and may participate in a further valid state transition.
 
-## Coherent Resumption
+The continuity loop is therefore:
 
-A resumed session should operate within the intended application context and possess enough relevant prior state to continue the work rather than unknowingly restart, contradict, or reinterpret it.
+1. read relevant current Dataset state,
+2. establish applicable Ruleset semantics,
+3. reason with current input,
+4. perform any valid governed transition,
+5. persist the resulting Dataset state,
+6. allow a later session to repeat the process.
 
-"Enough" is intentionally semantic rather than volumetric.
+## Durable State, Not Conversational Memory
 
-Continuity does not require reproducing every token, every prior inference, or every persisted value. It requires sufficient context and state to preserve the meaning necessary for the intended continuation.
+The Dataset is the durable representation of current application state.
 
-## Session Boundaries
+A chat transcript may be useful evidence or input in a particular application, but ADR does not require conversational history itself to be the state authority.
 
-ADR recognizes a reasoning-session boundary as a point across which continuity cannot rely solely on transient model context.
+This separation allows application continuity even when:
 
-The exact identity and mechanics of a session boundary are not defined here.
+- a chat session ends,
+- a context window is replaced,
+- a model invocation is restarted,
+- a different Agent instance continues the work,
+- only a bounded representation of prior work is loaded.
 
-A derived application may treat process restarts, model invocations, conversation resets, agent replacements, time-separated work, or other events as session boundaries when that distinction is meaningful to the application.
+## Sufficient State and Governance
 
-## Failure and Degradation
+Continuity does not require replaying every prior token or reconstructing every intermediate inference.
 
-Continuity can be threatened by:
+It requires enough current Dataset state and applicable Ruleset semantics to preserve the application meaning necessary for the next operation.
 
-- missing state,
-- stale state,
-- invalid state,
-- conflicting state,
-- missing governed context,
-- stale governed context,
-- incompatible context and state,
-- insufficient reconstruction for the intended task.
+The derived application defines what "enough" means for its domain.
 
-These conditions are product-significant, but this Design does not yet assign exact success, failure, recovery, or degraded-operation behavior.
+## SCF and Continuity
 
-Further Design is required before Planning defines those semantics.
+SCF provides the Dataset-side foundation for continuity.
+
+Its concern is maintaining persistent state and the contracts necessary for that state to remain meaningful across Agent sessions.
+
+Derived applications specialize SCF with their own state model and continuity requirements.
+
+## CGI and Continuity
+
+CGI provides the Ruleset-side foundation for continuity.
+
+Its concern is ensuring that a later Agent session reasons under the application semantics required to interpret current state and govern further transitions.
+
+Derived applications specialize CGI with their own context, governance, and interpretation rules.
+
+## Agent Replacement
+
+Continuity is an application property rather than the persistence of one particular model instance.
+
+A later session may use another Agent instance, model invocation, or compatible reasoning engine if the derived application's semantics permit it.
+
+The continuing Agent operates from current Dataset state under the applicable Ruleset rather than inheriting authority merely from being the same conversational process.
+
+## Failure and Recovery
+
+Continuity may be disrupted when required state or governing semantics are:
+
+- missing,
+- stale,
+- invalid,
+- conflicting,
+- insufficient for the intended operation.
+
+ADR identifies these as consequential conditions but does not impose universal recovery behavior.
+
+Each derived application defines the success, failure, fallback, or recovery semantics appropriate to its domain.
 
 ## Drift and Hallucination
 
-Reduced drift and hallucination are motivations for continuity and context governance.
+ADR's architecture is intended to reduce uncontrolled drift by making durable application state and governing semantics explicit rather than relying on transient model memory or inference alone.
 
-ADR's approach is to make relevant context and state explicit and reconstructable across sessions rather than expecting the reasoning engine to infer or remember them implicitly.
+This structure does not guarantee that an Agent will never hallucinate or reason incorrectly.
 
-This Design does not claim that the architecture eliminates hallucination, nor does it define a quantitative threshold for acceptable drift.
+Derived applications may define their own validation, review, or conformance measures where those behaviors materially affect the application.
 
-Conformance evidence and measurable criteria require further Design and Planning.
+## Derived-Application Responsibility
 
-## SCF and CGI
+ADR defines continuity as the relationship among persistent Dataset state, applicable Ruleset semantics, and Agent reasoning across session boundaries.
 
-SCF and CGI provide complementary views of this outcome.
+SCF and CGI provide reusable foundations for realizing that relationship.
 
-SCF emphasizes state flow, restoration, and continuity across session boundaries.
-
-CGI emphasizes the governed context within which restored state is interpreted and reasoning proceeds.
-
-The continuity outcome depends on both perspectives without requiring either to become a separate runtime subsystem or independent product domain.
-
-## Derived-Application Independence
-
-A derived application can provide cross-session continuity without depending on ADR at runtime.
-
-ADR defines the product semantics to preserve; the application owns the concrete mechanisms that persist state, reconstruct context, initialize reasoning, and recover from session boundaries.
-
-## Design Questions
-
-Further Design may need to resolve:
-
-- the minimum conditions for successful continuity,
-- observable success and failure semantics,
-- stale, invalid, missing, and conflicting input behavior,
-- recovery and fallback semantics,
-- session identity where product meaning depends on it,
-- what continuity evidence is needed for conformance,
-- how drift reduction can be evaluated without overstating model guarantees.
-
-## Planning Boundary
-
-Planning may define bounded Functional Sets and normative requirements for continuity once the relevant Design is sufficiently reviewed.
-
-Planning should not resolve missing continuity semantics by choosing an implementation and treating its behavior as intended product meaning.
+Each ADR-derived application defines the concrete state, governance, transition, failure, and recovery semantics that make continuity meaningful in its domain.

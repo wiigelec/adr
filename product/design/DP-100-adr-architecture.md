@@ -8,84 +8,122 @@ depends_on: []
 
 ## Purpose
 
-ADR is a foundational specification basis for AI-driven applications that need governed reasoning context and durable state across reasoning sessions.
+ADR — **Agent · Dataset · Ruleset** — is a seed specification set for deriving AI-driven applications.
 
-ADR defines product meaning that derived applications realize independently. ADR does not require a derived application to depend on ADR as a runtime component.
+ADR defines the foundational product concepts, relationships, and contracts that an ADR-derived application specializes. ADR does not define the concrete domain semantics of a particular application and does not need to exist as a runtime dependency of that application.
 
 ## Core Model
 
-ADR is organized around three primary concepts:
+ADR defines three first-class concepts:
 
-- **AI agent** — the reasoning engine.
-- **Ruleset** — governed application context.
-- **Dataset** — persistent application and session state.
+- **Agent** — the reasoning engine.
+- **Dataset** — the persistent state machine representing the application's current durable state.
+- **Ruleset** — the governed application semantics that establish reasoning context and constrain valid interpretation and state transition.
 
-The concepts are independently meaningful, but ADR's central product meaning is expressed through their relationship.
+The three concepts are defined separately so that their responsibilities remain clear, but ADR's primary meaning is expressed through their interaction.
 
-The ruleset establishes the application context within which reasoning occurs. The dataset carries relevant state beyond a single reasoning session. The AI agent reasons using context and state supplied by the derived application.
+## Dataset as Persistent State
 
-## Governing Relationship
+The Dataset represents the durable state of an ADR-derived application.
 
-A derived application uses governed context and relevant persisted state together to initialize or continue reasoning.
+A reasoning session reads relevant current Dataset state rather than depending on conversational memory as the application's authoritative state.
 
-The relationship is semantic rather than implementation-specific. ADR does not require a particular model provider, prompting strategy, retrieval system, serialization, storage engine, API, or runtime architecture.
+The Dataset is a state machine in the semantic sense: it has a current state, that state may evolve, and the resulting state is persisted so later reasoning sessions can continue from it.
 
-A realization may use complete source material, bounded projections, retrieval, generated context, or another mechanism when that mechanism preserves the intended relationship among ruleset, dataset, and agent.
+ADR does not define the concrete state vocabulary, schema, storage model, or transition set of a derived application. Those semantics belong to the derived application.
 
-## Continuity Outcome
+## Ruleset as Governance
 
-ADR supports applications in which a later reasoning session can regain sufficient governed context and relevant persisted state to continue prior application work coherently.
+The Ruleset defines the application-specific semantics under which the Agent interprets input and Dataset state.
 
-Continuity is therefore not conversational memory alone. It is the reconstruction or re-establishment of enough explicit application context and state for reasoning to resume within the intended application domain.
+It governs the context in which reasoning occurs and the conditions under which application state may change.
 
-## Derived-Application Independence
+The Ruleset does not merely supply static instructions. It participates in defining what application state means, what inputs are relevant, and what constitutes a valid transition from one Dataset state to another.
 
-ADR provides semantic scaffolding rather than a mandatory runtime.
+ADR defines the role of the Ruleset without defining the concrete domain rules of a derived application.
 
-A derived application owns its concrete realization of:
+## Agent Interaction
 
-- ruleset representation,
-- dataset representation and persistence,
-- context construction,
-- state selection,
-- agent invocation,
-- retrieval or projection mechanisms,
-- runtime orchestration.
+The Agent reasons over the current application situation using:
 
-Those choices remain implementation concerns unless later ADR Design gives them product-level meaning.
+- relevant current Dataset state,
+- the applicable Ruleset,
+- user input,
+- Agent reasoning and intermediate conclusions.
 
-## Cross-Cutting Perspectives
+That interaction may produce a state transition.
 
-ADR recognizes two cross-cutting perspectives over the core model:
+At the abstract level, the relationship is:
 
-- **SCF — Session Continuity Framework** focuses on continuity, state flow, and restoration across reasoning sessions.
-- **CGI — Context Governance Infrastructure** focuses on governed context and its relationship to reasoning.
+`current Dataset state + Ruleset + user input + Agent reasoning → next Dataset state`
 
-SCF and CGI describe perspectives over the same core product model. They are not independently established product domains unless later Design determines that separating them materially improves product meaning.
+This expression describes product meaning, not a required execution algorithm.
+
+The Ruleset governs the interpretation and validity of the transition. The Dataset persists the resulting application state. The Agent supplies the reasoning capability that participates in determining the transition.
+
+## ADR-Derived Applications
+
+An ADR-derived application specializes the seed architecture by defining its own:
+
+- Dataset state semantics,
+- Dataset state-transition semantics,
+- Ruleset context and governance semantics,
+- relationships between user input, Agent reasoning, and state change,
+- Agent behavior needed by the application,
+- concrete realization and implementation choices.
+
+A derived application may therefore be highly domain-specific while remaining structurally grounded in ADR.
+
+ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsibilities and their contracts, not about copying one fixed application schema or runtime.
+
+## SCF and CGI
+
+ADR recognizes two realization frameworks aligned with the Dataset and Ruleset concepts:
+
+- **SCF — Session Continuity Framework / SCF Contract Foundations** realizes the Dataset-side continuity and persistent-state responsibilities.
+- **CGI — Chat Governance Infrastructure** realizes the Ruleset-side context and governance responsibilities.
+
+SCF and CGI are not the application-specific Dataset and Ruleset semantics themselves. They provide reusable foundations through which an ADR-derived application can define and realize those semantics.
+
+They may be specified independently of any particular runtime implementation.
+
+## Session Continuity
+
+Session continuity follows from the persistent-state model.
+
+A later Agent session can read relevant current Dataset state and operate under the applicable Ruleset without requiring the prior conversation itself to remain the application's authoritative memory.
+
+Continuity therefore means preserving enough durable application state and governed semantics for reasoning to resume coherently across session boundaries.
 
 ## Product Motivation
 
-ADR is intended to reduce uncontrolled drift and hallucination in context-rich, data-intensive AI-driven work where a single chat session is insufficient to carry the full application context and state.
+ADR is intended for context-rich and data-intensive AI-driven applications where important application state and governing semantics exceed what should be entrusted to one transient chat session.
 
-This motivation does not by itself define a measurable conformance threshold. Observable conformance semantics belong in later Design and Planning when sufficiently understood.
+By separating durable state, governing semantics, and reasoning capability, ADR provides a structure for reducing uncontrolled drift and preserving application continuity.
+
+ADR does not claim to eliminate hallucination and does not define a universal quantitative drift threshold.
 
 ## Further Design
 
 This architecture is decomposed into:
 
-- DP-110 — Ruleset Context Governance
-- DP-120 — Persistent Dataset State
-- DP-130 — Agent Initialization
-- DP-140 — Cross-Session Continuity
+- DP-110 — Ruleset Architecture
+- DP-120 — Dataset Architecture
+- DP-130 — Agent Interaction and State Transition
+- DP-140 — Session Continuity
 
-DP-110 and DP-120 establish the two foundational inputs to reasoning.
+DP-110 defines Ruleset meaning and its relationship to CGI.
 
-DP-130 defines their composition for initialization or continuation.
+DP-120 defines Dataset state-machine meaning and its relationship to SCF.
 
-DP-140 defines the end-to-end continuity outcome produced from that composition.
+DP-130 defines how Agent reasoning, Ruleset governance, user input, and current Dataset state participate in state transition.
+
+DP-140 defines continuity across reasoning sessions as an outcome of persistent Dataset state interpreted under the applicable Ruleset.
 
 ## Design Boundary
 
-This Design establishes product meaning without prescribing exact schemas, APIs, encodings, storage technologies, prompting techniques, retrieval algorithms, provider choices, or runtime implementation.
+ADR establishes seed semantics and contracts.
 
-Consequential unresolved semantic decisions remain Design work. Planning may consume sufficiently developed Design but does not invent missing product meaning.
+It does not prescribe the concrete state vocabulary, domain rules, schemas, APIs, encodings, storage technologies, prompting techniques, retrieval algorithms, model providers, or runtime orchestration of an ADR-derived application.
+
+Those choices belong to derived-application Design, Planning, or implementation according to whether they carry product meaning or merely realize already-defined meaning.
