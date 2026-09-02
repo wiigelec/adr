@@ -94,7 +94,7 @@ ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsi
 
 An ADR-derived application defines reusable application meaning through its Dataset semantics, Ruleset semantics, transition semantics, and required Agent behavior.
 
-A derived application may support one or more **application instances**. An application instance is one independently continuing realization of that application whose committed state is represented by its own Dataset.
+A derived application may support one or more **application instances**. An application instance is one independently continuing stateful instance of that application whose committed state is represented by its own Dataset.
 
 Multiple application instances may therefore operate under the same application Ruleset while maintaining independent Dataset state. A state transition in one instance does not alter another instance merely because both are governed by the same Ruleset.
 
