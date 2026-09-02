@@ -39,11 +39,11 @@ A state transition is therefore not valid merely because an Agent can produce a 
 
 The transition must remain consistent with the application semantics established by the Ruleset.
 
-The exact meaning of validity is application-specific and is defined by the ADR-derived application.
+The exact meaning of validity and acceptance is application-specific and is defined by the ADR-derived application.
 
 ## User Input and Agent Reasoning
 
-User input and Agent reasoning may both affect the next application state.
+User input and Agent reasoning may both affect a proposed next application state.
 
 The Ruleset governs how those influences are interpreted.
 
@@ -58,11 +58,11 @@ Neither user input nor Agent reasoning independently replaces the Ruleset as the
 Ruleset and Dataset have distinct roles:
 
 - Ruleset defines how the application is understood and governed.
-- Dataset represents the application's current persistent state.
+- Dataset represents the application's current committed state.
 
 A piece of information belongs conceptually to the Ruleset when its primary role is to define application meaning or governance.
 
-A piece of information belongs conceptually to the Dataset when its primary role is to represent current persistent application state.
+A piece of information belongs conceptually to the Dataset when its primary role is to represent current committed application state.
 
 A derived application may realize both using the same physical technology without collapsing their semantic distinction.
 
@@ -74,19 +74,27 @@ CGI provides a reusable foundation for expressing and applying governed applicat
 
 CGI is not itself the concrete Ruleset of every ADR-derived application.
 
-A derived application uses or specializes CGI to define the rules, context, constraints, and interpretation semantics specific to that application.
+A derived application uses or specializes CGI to define the rules, context, constraints, authority relationships, and interpretation semantics specific to that application.
 
 CGI may be specified without requiring a particular model provider, prompt format, retrieval system, or runtime framework.
 
-## Bounded Context
+## Bounded Governed Context
 
 An Agent need not receive every Ruleset artifact in full for every reasoning operation.
 
 A derived application may construct a bounded representation of applicable Ruleset meaning.
 
-Whatever mechanism is used, the resulting reasoning context must preserve the application semantics required for the current operation.
+Whatever mechanism is used, the resulting reasoning context must preserve the application semantics required for the current operation and remain traceable to the governing Ruleset meaning from which it was selected or derived.
 
-The method of context construction is not itself part of the abstract Ruleset definition unless a derived application gives that method product-level meaning.
+Bounded context is therefore a projection of authority, not a replacement authority.
+
+## Missing Governing Semantics
+
+When required Ruleset semantics are absent, ambiguous, or unresolved, the affected reasoning operation is semantically underspecified.
+
+Missing governing semantics are not permission for the Agent to infer new application rules, silently invent transition policy, or treat implementation behavior as authoritative meaning.
+
+A derived application may define explicit behavior for underspecified conditions, but that behavior itself must come from application-owned semantics.
 
 ## Authority
 
