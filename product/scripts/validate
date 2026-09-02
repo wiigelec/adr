@@ -27,6 +27,14 @@ FUNCTIONAL_SETS = {
         "requirement_count": 18,
         "mechanical_requirements": {"FS-002-NR-015", "FS-002-NR-016", "FS-002-NR-017"},
     },
+    "FS-003": {
+        "spec": ROOT / "product" / "specs" / "FS-003-adr-application-realization.md",
+        "artifact": ROOT / "product" / "src" / "FS-003-adr-application-realization.seed.json",
+        "design_revision": "3c901f08c1014fcbc014f45aedb3a485f791a9f8",
+        "title": "ADR Application Realization and Initialization",
+        "requirement_count": 18,
+        "mechanical_requirements": {"FS-003-NR-015", "FS-003-NR-016", "FS-003-NR-017"},
+    },
 }
 
 def fail(message: str) -> None:
@@ -132,7 +140,7 @@ def main() -> int:
     for fs_id, cfg in FUNCTIONAL_SETS.items():
         validate_artifact(fs_id, cfg)
     validate_manifest()
-    print("PASS: FS-001 and FS-002 seed-spec artifacts exist, are traceable, and exactly preserve their canonical normative contracts.")
+    print("PASS: FS-001, FS-002, and FS-003 seed-spec artifacts exist, are traceable, and exactly preserve their canonical normative contracts.")
     return 0
 
 if __name__ == "__main__":

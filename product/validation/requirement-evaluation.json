@@ -36,6 +36,24 @@
       "tasks": [
         "seed-spec-artifact"
       ]
+    },
+    {
+      "requirement": "FS-003-NR-015",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
+    },
+    {
+      "requirement": "FS-003-NR-016",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
+    },
+    {
+      "requirement": "FS-003-NR-017",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
     }
   ]
 }
