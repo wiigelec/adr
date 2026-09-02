@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "bindings": [
+    {
+      "requirement": "FS-001-NR-015",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
+    },
+    {
+      "requirement": "FS-001-NR-016",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
+    },
+    {
+      "requirement": "FS-001-NR-017",
+      "tasks": [
+        "seed-spec-artifact"
+      ]
+    }
+  ]
+}
