@@ -36,6 +36,10 @@ Ruleset and Dataset remain semantically distinct even when physically co-located
 
 When multiple distinguishable Ruleset states may coexist, preserve the applicable Ruleset identity or traceability required by accepted Product Design and Planning. Do not silently reinterpret existing Dataset state under changed Ruleset semantics.
 
+Treat application initialization as semantic binding, not as an implicit Dataset mutation. Do not make a provider-specific bootstrap prompt, JSON/YAML/Markdown shape, single-file package, repository layout, or application-builder implementation into ADR core meaning unless accepted Product Design and Planning explicitly do so.
+
+Concrete realization tooling may generate self-contained or managed ADR application artifacts, but generated artifacts and builders do not become ADR normative authority merely by implementing ADR semantics.
+
 ## Build discipline
 
 Consume reviewed Design and Planning. Prefer the simplest implementation that preserves their meaning and satisfies applicable normative requirements.
