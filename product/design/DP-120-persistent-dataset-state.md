@@ -191,4 +191,4 @@ SCF Contract Foundation supplies reusable Dataset-side foundational contracts.
 
 SCF supplies the broader Dataset-side realization framework.
 
-The derived application supplies the actual application state model.
+The derived application supplies the domain-specific Ruleset semantics; each application instance supplies its committed Dataset state.
