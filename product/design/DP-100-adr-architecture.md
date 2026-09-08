@@ -88,7 +88,8 @@ An ADR-derived application specializes the seed architecture by defining its own
 - Ruleset semantics governing Dataset structure, interpretation, validity, and state transition,
 - Ruleset context and governance semantics,
 - transition acceptance semantics,
-- Dataset state vocabulary and committed application-instance data model,
+- Ruleset semantics governing the permitted Dataset state vocabulary and structure,
+- committed application-instance Dataset state,
 - relationships between user input, Agent reasoning, and state change,
 - Agent behavior needed by the application,
 - concrete realization and implementation choices.
@@ -164,7 +165,7 @@ ADR recognizes reusable realization frameworks aligned with the Dataset and Rule
 
 **SCF — Session Continuity Framework** is the Dataset-side realization framework concerned with persistent state and continuity across Agent sessions.
 
-**SCF Contract Foundation** is the reusable Dataset-side foundational contract set from which SCF realizations and ADR-derived application Dataset semantics may be constructed.
+**SCF Contract Foundation** is the reusable Dataset-side foundational contract set from which SCF realizations and ADR-derived application Dataset state models may be constructed under application Ruleset semantics.
 
 **CGI — Chat Governance Infrastructure** is the Ruleset-side realization framework concerned with governed context, interpretation, and state-transition semantics.
 

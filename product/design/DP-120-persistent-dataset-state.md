@@ -123,7 +123,7 @@ ADR does not prescribe the binding representation or storage mechanism.
 
 SCF concerns persistent state, state continuity, and preserving meaningful Dataset authority across Agent sessions.
 
-SCF is not itself the concrete Dataset semantics of every ADR-derived application.
+SCF is not itself the concrete Dataset state model or the Ruleset semantics governing that state for every ADR-derived application.
 
 A derived application uses or specializes SCF to realize the continuity behavior required by its own state model.
 
