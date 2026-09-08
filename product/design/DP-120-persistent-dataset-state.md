@@ -13,7 +13,7 @@ The Dataset is the persistent state machine of an ADR-derived application instan
 
 It represents the durable current state from which an Agent can understand ongoing application work for the selected instance and to which accepted governed state transitions can be persisted.
 
-ADR defines the Dataset role and continuity contract. Each ADR-derived application defines its concrete state semantics.
+ADR defines the Dataset role and continuity contract. Each ADR-derived application defines its concrete state model and the Ruleset semantics governing how that state is structured, interpreted, validated, and changed.
 
 
 ## Application-Instance State
@@ -89,9 +89,18 @@ Dataset and Ruleset remain semantically distinct.
 
 The Dataset answers, in application-specific terms, **what is the current committed state?**
 
-The Ruleset answers, in application-specific terms, **how is that state interpreted and under what semantics may it change?**
+The Ruleset answers, in application-specific terms, **how is that state structured and interpreted, what makes it valid, and under what semantics may it change?**
 
-The distinction follows meaning rather than storage mechanism, update frequency, or file type.
+Therefore:
+
+- **Ruleset owns rules.**
+- **Dataset owns committed application-instance data.**
+
+Schemas or structural requirements, validity conditions, invariants, transition rules, compatibility rules, and migration rules are Ruleset-side concerns when they define what Dataset data means, may contain, or may become.
+
+The actual committed values governed by those rules are Dataset-side concerns.
+
+The distinction follows meaning rather than storage mechanism, update frequency, file type, or execution location.
 
 
 Ruleset and Dataset material may therefore be physically co-located, including within one portable application artifact, without losing their semantic distinction.
@@ -152,7 +161,7 @@ Only an accepted transition changes authoritative Dataset state.
 
 ## State Evolution
 
-Derived-application Design may define semantics for:
+Derived-application Design may define rules for:
 
 - state identity,
 - state validity,
@@ -162,17 +171,21 @@ Derived-application Design may define semantics for:
 - conflict handling,
 - stale state,
 - recovery,
-- provenance,
+- provenance requirements,
 - retention,
-- partial or bounded state views.
+- partial or bounded state views,
+- compatibility with changed Ruleset semantics,
+- migration or transformation of existing state.
+
+When these concerns define how Dataset data is interpreted, constrained, validated, or permitted to change, they are Ruleset-owned semantics. The Dataset owns the committed instance values, including any state, status, provenance, or other values produced and accepted under those semantics.
 
 ADR does not impose one universal model for those concerns.
 
 ## Derived-Application Responsibility
 
-Each ADR-derived application defines its Dataset semantics and state-transition model.
+Each ADR-derived application defines its Dataset state model and the Ruleset semantics governing that state and its transitions.
 
-ADR supplies the architectural role and continuity contract.
+ADR supplies the architectural roles, ownership boundary, and continuity contract.
 
 SCF Contract Foundation supplies reusable Dataset-side foundational contracts.
 

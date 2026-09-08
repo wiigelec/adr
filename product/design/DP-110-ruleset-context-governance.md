@@ -57,12 +57,14 @@ Neither user input nor Agent reasoning independently replaces the Ruleset as the
 
 Ruleset and Dataset have distinct roles:
 
-- Ruleset defines how the application is understood and governed.
-- Dataset represents the application's current committed state.
+- **Ruleset owns rules:** it defines how the application and Dataset state are understood and governed.
+- **Dataset owns data:** it represents the application's current committed application-instance state.
 
-A piece of information belongs conceptually to the Ruleset when its primary role is to define application meaning or governance.
+A piece of information belongs conceptually to the Ruleset when its primary role is to define application meaning or governance. This includes structural or schema requirements for Dataset data, validity conditions, invariants, transition conditions, acceptance rules, compatibility rules, and migration or transformation rules.
 
-A piece of information belongs conceptually to the Dataset when its primary role is to represent current committed application state.
+A piece of information belongs conceptually to the Dataset when its primary role is to represent actual committed application-instance data governed by those rules.
+
+A rule does not become Dataset-owned merely because it validates, transforms, or otherwise operates on Dataset data. Dataset data does not become Ruleset-owned merely because a Ruleset change requires it to be validated, migrated, or transformed.
 
 A derived application may realize both using the same physical technology without collapsing their semantic distinction.
 
@@ -90,6 +92,18 @@ A change to Ruleset semantics can be consequential to existing Dataset state.
 Derived-application Design must define compatibility, migration, refusal, recovery, or other semantics when a Ruleset change can alter the meaning or validity of already committed state or the transitions available from that state.
 
 A new Ruleset state does not automatically retroactively redefine earlier committed Dataset meaning unless the application's own semantics establish that behavior.
+
+When Ruleset evolution requires existing Dataset data to be validated, migrated, transformed, refused, or recovered, the governing compatibility and transition semantics remain Ruleset-owned. Applying those semantics may change Dataset data without transferring committed-state authority from the Dataset to the Ruleset.
+
+## Rule Realization and Mechanical Enforcement
+
+A derived application may mechanically realize Ruleset semantics through schemas, validators, migration implementations, transition checkers, or other enforcement mechanisms.
+
+Such mechanisms implement or apply Ruleset-owned meaning; they do not become independent semantic authorities merely because they execute mechanically or operate directly on Dataset data.
+
+If a mechanical realization conflicts with accepted Ruleset semantics, the realization is defective. Implementation behavior must not silently redefine application meaning.
+
+The physical placement of such a mechanism does not determine semantic ownership. A validator or migration tool may be stored or executed alongside Dataset data while remaining a realization of Ruleset-owned rules.
 
 ## CGI — Chat Governance Infrastructure
 

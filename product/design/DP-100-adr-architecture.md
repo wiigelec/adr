@@ -22,6 +22,14 @@ ADR defines three first-class concepts:
 
 The three concepts are defined separately so that their responsibilities remain clear, but ADR's primary meaning is expressed through their interaction.
 
+At the ownership boundary:
+
+- **Ruleset owns rules.**
+- **Dataset owns committed application-instance data.**
+- **Agent reasoning is transient unless governed transition semantics accept resulting information into the Dataset.**
+
+This ownership distinction follows semantic role rather than storage location, file type, execution location, or update frequency.
+
 ## Dataset as Persistent Authority
 
 The Dataset represents the durable state of an ADR-derived application.
@@ -32,7 +40,7 @@ The Dataset is a state machine in the semantic sense: it has a current state, th
 
 Committed application state has one authoritative home: the Dataset.
 
-ADR does not define the concrete state vocabulary, schema, storage model, or transition set of a derived application. Those semantics belong to the derived application.
+ADR does not define the concrete state vocabulary, schema, storage model, or transition set of a derived application. The derived application defines those concerns. Requirements that govern Dataset structure, interpretation, validity, or transition belong semantically to the Ruleset; the committed values governed by those requirements belong to the Dataset.
 
 ## Ruleset as Governance
 
@@ -77,10 +85,10 @@ The Ruleset governs the interpretation and validity of the transition. The Datas
 
 An ADR-derived application specializes the seed architecture by defining its own:
 
-- Dataset state semantics,
-- Dataset state-transition semantics,
+- Ruleset semantics governing Dataset structure, interpretation, validity, and state transition,
 - Ruleset context and governance semantics,
 - transition acceptance semantics,
+- Dataset state vocabulary and committed application-instance data model,
 - relationships between user input, Agent reasoning, and state change,
 - Agent behavior needed by the application,
 - concrete realization and implementation choices.
@@ -92,7 +100,7 @@ ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsi
 
 ## Application Definition and Application Instances
 
-An ADR-derived application defines reusable application meaning through its Dataset semantics, Ruleset semantics, transition semantics, and required Agent behavior.
+An ADR-derived application defines reusable application meaning through its Ruleset semantics, including the rules governing Dataset structure and transition, together with its Dataset state model and required Agent behavior.
 
 A derived application may support one or more **application instances**. An application instance is one independently continuing stateful instance of that application whose committed state is represented by its own Dataset.
 
@@ -125,6 +133,10 @@ Ruleset semantics may evolve independently from an application instance's Datase
 When a Ruleset change can alter the interpretation, validity, or permitted transition of existing Dataset state, the derived application must define whatever compatibility, migration, acceptance, refusal, or recovery semantics are necessary to keep the affected instance well-defined.
 
 ADR does not require one universal migration model. It requires only that consequential Ruleset change not silently reinterpret committed Dataset state without application-owned semantics establishing the resulting meaning.
+
+Compatibility, migration, refusal, recovery, and other rules governing how existing Dataset data may become valid under changed Ruleset semantics are Ruleset-owned rules. Applying such rules may transform Dataset data, but the accepted resulting data remains Dataset-owned committed application state.
+
+A validator, migration implementation, or other mechanical realization of Ruleset-owned semantics is not an independent semantic authority. Implementation behavior that conflicts with accepted Ruleset meaning is a realization defect rather than a redefinition of application semantics.
 
 ## Agent Session Binding
 
