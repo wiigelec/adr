@@ -52,9 +52,11 @@ The artifact must preserve that committed-state authority without imposing a con
 
 ## Ruleset Contract
 
-The Ruleset is the application-owned source of interpretation and transition-governance semantics.
+The Ruleset is the application-owned source of rules governing Dataset structure/schema, interpretation, validity, invariants, transition validity, and transition acceptance.
 
 The artifact must preserve that role without imposing a concrete Ruleset encoding or delivery mechanism.
+
+Schemas, validators, transition checkers, and equivalent enforcement mechanisms may realize those Ruleset-owned semantics, but their execution or physical placement shall not make them independent semantic authorities.
 
 ## Transition Contract
 
@@ -62,7 +64,7 @@ The artifact must preserve the semantic boundary:
 
 `current committed Dataset state + Ruleset + user input + Agent reasoning → proposed next state → governed acceptance → next committed Dataset state`
 
-Acceptance remains application-specific.
+Acceptance remains application-specific and is defined by Ruleset-owned transition-acceptance semantics.
 
 ## Bounded Context and Missing Authority
 

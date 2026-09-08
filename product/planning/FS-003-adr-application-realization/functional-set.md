@@ -1,17 +1,17 @@
 # FS-003 — ADR Application Realization and Initialization
 
 functional_set: FS-003
-design_revision: 44d6ca44a408c2d4c79dba95d4dc363400ae1743
+design_revision: 1918caa562dc459de34f1181bf72dca24ec4dbeb
 
 ## Purpose
 
-FS-003 establishes the ADR contract for concrete application realizations to initialize a fresh Agent reasoning operation with determinate application, instance, Ruleset, and Dataset meaning without making one provider, file format, package shape, or builder technology part of ADR core.
+FS-003 establishes the ADR contract for concrete application realizations to initialize a fresh Agent reasoning operation with determinate application identity, instance identity, applicable Ruleset semantics, and committed Dataset state without making one provider, file format, package shape, or builder technology part of ADR core.
 
 It selects the realization and initialization meaning established by DP-150 while preserving FS-001 and FS-002 authority boundaries.
 
 ## Selected Design Scope
 
-FS-003 consumes ADR Design at revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`, including DP-100 through DP-150 as applicable to realization, initialization, authority, instance binding, continuity, and transition semantics.
+FS-003 consumes ADR Design at revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`, including DP-100 through DP-150 as applicable to realization, initialization, authority, instance binding, continuity, and transition semantics.
 
 ## Functional Boundary
 

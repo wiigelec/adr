@@ -22,6 +22,14 @@ ADR defines three first-class concepts:
 
 The three concepts are defined separately so that their responsibilities remain clear, but ADR's primary meaning is expressed through their interaction.
 
+At the ownership boundary:
+
+- **Ruleset owns rules.**
+- **Dataset owns committed application-instance data.**
+- **Agent reasoning is transient unless governed transition semantics accept resulting information into the Dataset.**
+
+This ownership distinction follows semantic role rather than storage location, file type, execution location, or update frequency.
+
 ## Dataset as Persistent Authority
 
 The Dataset represents the durable state of an ADR-derived application.
@@ -32,7 +40,7 @@ The Dataset is a state machine in the semantic sense: it has a current state, th
 
 Committed application state has one authoritative home: the Dataset.
 
-ADR does not define the concrete state vocabulary, schema, storage model, or transition set of a derived application. Those semantics belong to the derived application.
+ADR does not define the concrete state vocabulary, schema, storage model, or transition set of a derived application. The derived application defines those concerns. Requirements that govern Dataset structure, interpretation, validity, or transition belong semantically to the Ruleset; the committed values governed by those requirements belong to the Dataset.
 
 ## Ruleset as Governance
 
@@ -77,13 +85,13 @@ The Ruleset governs the interpretation and validity of the transition. The Datas
 
 An ADR-derived application specializes the seed architecture by defining its own:
 
-- Dataset state semantics,
-- Dataset state-transition semantics,
+- Ruleset semantics governing permitted Dataset structure, state vocabulary, interpretation, validity, state transition, and transition acceptance,
 - Ruleset context and governance semantics,
-- transition acceptance semantics,
 - relationships between user input, Agent reasoning, and state change,
 - Agent behavior needed by the application,
 - concrete realization and implementation choices.
+
+The derived application defines the rules governing what Dataset state may mean and become. Each application instance independently owns the actual committed Dataset state produced and accepted under those rules.
 
 A derived application may therefore be highly domain-specific while remaining structurally grounded in ADR.
 
@@ -92,7 +100,7 @@ ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsi
 
 ## Application Definition and Application Instances
 
-An ADR-derived application defines reusable application meaning through its Dataset semantics, Ruleset semantics, transition semantics, and required Agent behavior.
+An ADR-derived application defines reusable application meaning through its Ruleset semantics, including the rules governing Dataset structure, interpretation, validity, and transition, together with the required Agent behavior. Individual application instances supply the actual committed Dataset state governed by those semantics.
 
 A derived application may support one or more **application instances**. An application instance is one independently continuing stateful instance of that application whose committed state is represented by its own Dataset.
 
@@ -126,6 +134,10 @@ When a Ruleset change can alter the interpretation, validity, or permitted trans
 
 ADR does not require one universal migration model. It requires only that consequential Ruleset change not silently reinterpret committed Dataset state without application-owned semantics establishing the resulting meaning.
 
+Compatibility, migration, refusal, recovery, and other rules governing how existing Dataset data may become valid under changed Ruleset semantics are Ruleset-owned rules. Applying such rules may transform Dataset data, but the accepted resulting data remains Dataset-owned committed application state.
+
+A validator, migration implementation, or other mechanical realization of Ruleset-owned semantics is not an independent semantic authority. Implementation behavior that conflicts with accepted Ruleset meaning is a realization defect rather than a redefinition of application semantics.
+
 ## Agent Session Binding
 
 A reasoning session operates against an applicable Ruleset and the relevant Dataset state of the selected application instance.
@@ -152,11 +164,11 @@ ADR recognizes reusable realization frameworks aligned with the Dataset and Rule
 
 **SCF — Session Continuity Framework** is the Dataset-side realization framework concerned with persistent state and continuity across Agent sessions.
 
-**SCF Contract Foundation** is the reusable Dataset-side foundational contract set from which SCF realizations and ADR-derived application Dataset semantics may be constructed.
+**SCF Contract Foundation** is the reusable Dataset-side foundational contract set from which SCF realizations may construct persistent-state continuity and authority behavior under application Ruleset semantics.
 
 **CGI — Chat Governance Infrastructure** is the Ruleset-side realization framework concerned with governed context, interpretation, and state-transition semantics.
 
-SCF, SCF Contract Foundation, and CGI are not the application-specific Dataset and Ruleset semantics themselves. They provide reusable foundations through which an ADR-derived application can define and realize those semantics.
+SCF, SCF Contract Foundation, and CGI are not the application-specific committed Dataset state or the Ruleset semantics governing that state. They provide reusable foundations through which an ADR-derived application can preserve Dataset authority and realize its Ruleset semantics.
 
 They may be specified independently of any particular runtime implementation.
 

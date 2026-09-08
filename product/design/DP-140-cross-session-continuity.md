@@ -75,7 +75,7 @@ When required current state or governing semantics are unavailable, continuity i
 
 A later Agent session must not compensate by inventing committed state, transition rules, or application meaning.
 
-The derived application may define recovery, refusal, degraded operation, or other explicit behavior for missing-authority conditions.
+The derived application may define Ruleset-owned recovery, refusal, degraded-operation, or other explicit governing semantics for missing-authority conditions.
 
 ## SCF Contract Foundation and SCF
 
@@ -83,7 +83,7 @@ SCF Contract Foundation provides reusable Dataset-side foundational contracts fo
 
 SCF — Session Continuity Framework — is the broader Dataset-side realization framework through which those concerns may be realized for ADR-derived applications.
 
-Derived applications specialize these foundations with their own state model and continuity requirements.
+Derived applications specialize these foundations with Ruleset semantics governing Dataset state and with application-specific continuity requirements. Application instances supply the actual committed Dataset state that SCF preserves across sessions.
 
 ## CGI and Continuity
 
@@ -116,10 +116,10 @@ Continuity may be disrupted when required state or governing semantics are:
 
 ADR identifies these as consequential conditions but does not impose universal recovery behavior.
 
-Each derived application defines the success, failure, fallback, or recovery semantics appropriate to its domain.
+Each derived application defines the Ruleset-owned success, failure, fallback, refusal, or recovery semantics appropriate to its domain.
 
 
-Ruleset evolution can also disrupt continuity when a new governing state changes the interpretation or validity of existing Dataset state. When consequential, the derived application defines compatibility, migration, acceptance, refusal, or recovery semantics before the instance continues under the changed Ruleset.
+Ruleset evolution can also disrupt continuity when a new governing state changes the interpretation or validity of existing Dataset state. When consequential, the derived application defines Ruleset-owned compatibility, migration, acceptance, refusal, or recovery semantics before the instance continues under the changed Ruleset. Applying those semantics may transform Dataset data, but the accepted resulting state remains Dataset-owned committed application state.
 
 ## Drift and Hallucination
 
@@ -127,7 +127,7 @@ ADR's architecture is intended to reduce uncontrolled drift by making durable ap
 
 This structure does not guarantee that an Agent will never hallucinate or reason incorrectly.
 
-Derived applications may define their own validation, review, or conformance measures where those behaviors materially affect the application.
+Derived applications may define Ruleset-owned validation, review, or conformance semantics where those behaviors materially affect the application. Mechanical implementations of those semantics do not become independent application authority.
 
 ## Derived-Application Responsibility
 
@@ -135,4 +135,4 @@ ADR defines continuity as the relationship among authoritative persistent Datase
 
 SCF Contract Foundation, SCF, and CGI provide reusable foundations for realizing that relationship.
 
-Each ADR-derived application defines the concrete state, governance, transition, acceptance, failure, and recovery semantics that make continuity meaningful in its domain.
+Each ADR-derived application defines the concrete Ruleset semantics governing Dataset interpretation, transition, acceptance, failure, refusal, recovery, and continuity behavior in its domain. Each application instance independently supplies the actual committed Dataset state preserved across sessions under those semantics.

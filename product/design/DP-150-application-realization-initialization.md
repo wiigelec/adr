@@ -41,7 +41,7 @@ A realization intended to initialize an Agent without prior application-specific
 - which application instance is selected;
 - which Ruleset authority applies when that distinction is consequential;
 - where relevant current authoritative Dataset state is obtained; and
-- any application-owned initialization semantics needed before ordinary reasoning can proceed.
+- any Ruleset-owned initialization semantics needed before ordinary reasoning can proceed.
 
 Missing governing semantics are not permission for the Agent to invent application meaning.
 
@@ -87,7 +87,7 @@ Portability means that application semantics and committed state can be transfer
 
 Portability does not guarantee identical natural-language presentation or model behavior across providers.
 
-A realization claiming cross-provider semantic equivalence must preserve the application-owned Ruleset and Dataset meaning required by the operations it supports.
+A realization claiming cross-provider semantic equivalence must preserve the applicable Ruleset semantics and committed Dataset state required by the operations it supports.
 
 ## Design Boundary
 

@@ -18,47 +18,47 @@ The Dataset shall be the sole authority for committed application state within a
 
 Agent working memory, model-local memory, chat history, intermediate reasoning, session buffers, and other transient reasoning state shall not be treated as committed application state unless information derived from them is accepted into the Dataset through the application's governed transition semantics.
 
-### FS-001-NR-004 — Ruleset Governs Interpretation
+### FS-001-NR-004 — Ruleset Governs Dataset Meaning and Validity
 
 **Classification: S**
 
-The Ruleset shall provide the application-owned semantics that govern interpretation of relevant input and current Dataset state.
+The Ruleset shall provide the application-owned semantics governing Dataset structural/schema requirements, interpretation, validity, invariants, and relevant input interpretation.
 
 ### FS-001-NR-005 — Ruleset Governs Transition Validity
 
 **Classification: S**
 
-A proposed Dataset state transition shall be judged according to application-owned Ruleset semantics and current Dataset meaning rather than being considered valid merely because the Agent or implementation can produce it.
+A proposed Dataset state transition shall be judged according to applicable Ruleset semantics interpreted against current committed Dataset state rather than being considered valid merely because the Agent or implementation can produce it.
 
 ### FS-001-NR-006 — Proposed State Is Not Committed State
 
 **Classification: S**
 
-Agent reasoning or user input that could change application state shall remain non-authoritative with respect to committed Dataset state until the derived application's transition semantics accept the resulting proposal.
+Agent reasoning or user input that could change application state shall remain non-authoritative with respect to committed Dataset state until the derived application's Ruleset-owned transition semantics accept the resulting proposal.
 
-### FS-001-NR-007 — Transition Acceptance Is Application-Owned
+### FS-001-NR-007 — Transition Acceptance Is Ruleset-Owned
 
 **Classification: S**
 
-Each ADR-derived application shall define the semantics that determine when a proposed state transition becomes accepted and therefore becomes the next committed Dataset state.
+Each ADR-derived application shall define, as Ruleset-owned semantics, the conditions that determine when a proposed state transition becomes accepted and therefore becomes the next committed Dataset state.
 
 ### FS-001-NR-008 — Transition Acceptance Must Preserve Governing Meaning
 
 **Classification: S**
 
-A transition-acceptance mechanism shall not invent application semantics beyond the derived application's applicable Ruleset and Dataset model.
+A transition-acceptance mechanism shall not invent application semantics beyond the derived application's applicable Ruleset or treat Dataset data as an independent source of governing rules.
 
-### FS-001-NR-009 — Derived Dataset Semantics
-
-**Classification: S**
-
-Each ADR-derived application shall define the concrete Dataset semantics necessary to identify its committed application state and the meaning of accepted state transitions.
-
-### FS-001-NR-010 — Derived Ruleset Semantics
+### FS-001-NR-009 — Ruleset Governs Dataset State Definition
 
 **Classification: S**
 
-Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation and state-transition validity.
+Each ADR-derived application shall define, as Ruleset semantics, the permitted structure, interpretation, validity, and transition meaning of Dataset state; the actual committed values governed by those semantics remain Dataset-owned data.
+
+### FS-001-NR-010 — Ruleset Semantics and Rule-Realization Authority
+
+**Classification: S**
+
+Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, Dataset validity, state-transition validity, and transition acceptance. Schemas, validators, transition checkers, and equivalent enforcement mechanisms that realize those semantics shall not become independent semantic authorities through execution, physical placement, or operation on Dataset data.
 
 ### FS-001-NR-011 — Bounded Context Fidelity
 
@@ -100,7 +100,7 @@ The FS-001 seed-spec artifact shall preserve the complete active FS-001 normativ
 
 **Classification: M**
 
-The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `4874ac8f288afeb1b45abbdd042eacec6aa081d5`.
+The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`.
 
 ### FS-001-NR-018 — Derived Artifact Non-Authority
 

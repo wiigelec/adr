@@ -58,13 +58,13 @@ A derived application may realize one separately managed Ruleset authority gover
 
 **Classification: S**
 
-When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined.
+When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the Ruleset-owned compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined. Validators, compatibility checkers, migration implementations, and equivalent mechanisms that realize or apply those semantics shall not become independent semantic authorities merely because they execute mechanically or operate on Dataset data.
 
 ### FS-002-NR-011 — No Silent Retroactive Reinterpretation
 
 **Classification: S**
 
-A changed Ruleset shall not silently retroactively reinterpret committed Dataset state unless the derived application's own semantics establish that resulting meaning.
+A changed Ruleset shall not silently retroactively reinterpret committed Dataset state unless the derived application's applicable Ruleset semantics establish that resulting meaning.
 
 ### FS-002-NR-012 — Agent Session Binding
 
@@ -76,7 +76,7 @@ A reasoning operation shall be semantically bound to the applicable Ruleset and 
 
 **Classification: S**
 
-Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset and transition semantics.
+Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset semantics.
 
 ### FS-002-NR-014 — Implementation Independence
 
@@ -100,7 +100,7 @@ The FS-002 seed-spec artifact shall preserve the complete active FS-002 normativ
 
 **Classification: M**
 
-The FS-002 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-002, and record the exact FS-002 Design revision `87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de`.
+The FS-002 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-002, and record the exact FS-002 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`.
 
 ### FS-002-NR-018 — Derived Artifact Non-Authority
 
