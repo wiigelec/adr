@@ -168,7 +168,7 @@ ADR recognizes reusable realization frameworks aligned with the Dataset and Rule
 
 **CGI — Chat Governance Infrastructure** is the Ruleset-side realization framework concerned with governed context, interpretation, and state-transition semantics.
 
-SCF, SCF Contract Foundation, and CGI are not the application-specific Dataset and Ruleset semantics themselves. They provide reusable foundations through which an ADR-derived application can define and realize those semantics.
+SCF, SCF Contract Foundation, and CGI are not the application-specific committed Dataset state or the Ruleset semantics governing that state. They provide reusable foundations through which an ADR-derived application can preserve Dataset authority and realize its Ruleset semantics.
 
 They may be specified independently of any particular runtime implementation.
 

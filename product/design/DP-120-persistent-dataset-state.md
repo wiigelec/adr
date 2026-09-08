@@ -81,7 +81,7 @@ The Ruleset governs application interpretation and transition validity.
 
 The Agent participates in reasoning that may determine or propose the next state.
 
-The derived application defines the exact transition and acceptance semantics.
+The derived application defines the exact Ruleset semantics governing transition and acceptance.
 
 ## Dataset and Ruleset Boundary
 
