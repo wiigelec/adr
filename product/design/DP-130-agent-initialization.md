@@ -80,7 +80,7 @@ If a reasoning operation requires governing semantics or current-state informati
 
 The Agent must not treat the absence of required authority as permission to invent application rules or committed state.
 
-A derived application may define explicit fallback, refusal, recovery, or degraded behavior for such conditions.
+A derived application may define explicit fallback, refusal, recovery, or degraded behavior for such conditions as Ruleset-owned semantics governing how the operation may proceed.
 
 ## Agent Reasoning
 
@@ -101,7 +101,7 @@ The reasoning engine remains subject to the application's Ruleset and current Da
 
 An Agent output is not automatically a Dataset mutation.
 
-A reasoning result that could affect application state is a proposal until the derived application's semantics accept it as a valid governed transition.
+A reasoning result that could affect application state is a proposal until the derived application's Ruleset-owned transition semantics accept it as a valid governed transition.
 
 This distinction separates:
 
@@ -113,13 +113,13 @@ ADR requires this semantic distinction but does not require one universal approv
 
 ## Transition Acceptance
 
-A derived application defines the conditions under which a proposed state transition becomes accepted.
+A derived application defines, as Ruleset-owned semantics, the conditions under which a proposed state transition becomes accepted.
 
-Those conditions are governed by the applicable Ruleset and interpreted against current Dataset state.
+Those conditions are interpreted against current Dataset state under the applicable Ruleset.
 
 Acceptance may be automatic, user-mediated, externally validated, multi-step, or otherwise specialized by the derived application.
 
-Whatever mechanism is chosen, it must not invent semantics beyond the application's Ruleset and Dataset model.
+Whatever mechanism is chosen, it must not invent semantics beyond the application's Ruleset or treat Dataset data as an independent source of governing rules.
 
 ## Ruleset Governance
 
@@ -150,19 +150,21 @@ A derived application may distinguish initial start, continuation, recovery, ref
 
 The same application may initialize or continue different independent instances by binding each reasoning operation to the applicable Ruleset and the selected instance's current Dataset state.
 
-When Ruleset evolution makes the existing Dataset/Ruleset relationship incompatible or ambiguous, the derived application's migration, refusal, recovery, or other application-owned semantics govern whether reasoning and further transition may proceed.
+When Ruleset evolution makes the existing Dataset/Ruleset relationship incompatible or ambiguous, Ruleset-owned compatibility, migration, refusal, recovery, or other governing semantics determine whether reasoning and further transition may proceed. Applying those semantics may change Dataset data only through an accepted governed transition.
 
 ## Derived-Application Responsibility
 
 ADR defines the interaction contract among Agent, Dataset, Ruleset, and user input.
 
-Each ADR-derived application defines the concrete semantics for:
+Each ADR-derived application defines the concrete Ruleset semantics governing:
 
-- what the Agent may read,
+- what the Agent may read and how that information is interpreted,
 - what counts as a valid proposed transition,
 - what counts as an accepted transition,
-- when accepted reasoning results become durable state,
+- when accepted reasoning results may become durable Dataset state,
 - what authority user input carries,
 - how invalid or conflicting transitions are handled,
-- what behavior applies when required authority is missing,
+- what fallback, refusal, recovery, or degraded behavior applies when required authority is missing,
 - what Agent behavior is required by the domain.
+
+Each application instance independently supplies the actual committed Dataset state governed by those semantics.
