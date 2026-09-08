@@ -10,13 +10,13 @@ An ADR-derived application's semantic definition shall remain distinguishable fr
 
 **Classification: S**
 
-A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any application-owned initialization semantics required before ordinary reasoning can proceed.
+A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any Ruleset-owned initialization semantics required before ordinary reasoning can proceed.
 
 ### FS-003-NR-003 — Application Identity
 
 **Classification: S**
 
-Initialization shall establish which ADR-derived application semantics govern the reasoning operation.
+Initialization shall establish which ADR-derived application's applicable Ruleset semantics govern the reasoning operation.
 
 ### FS-003-NR-004 — Instance Identity
 
@@ -52,7 +52,7 @@ When governing Ruleset semantics required for initialization or operation are mi
 
 **Classification: S**
 
-After initialization, an Agent may inspect, summarize, explain, or otherwise reason about application state without creating a Dataset transition when the applicable application semantics classify the operation as non-mutating.
+After initialization, an Agent may inspect, summarize, explain, or otherwise reason about application state without creating a Dataset transition when the applicable Ruleset semantics classify the operation as non-mutating.
 
 ### FS-003-NR-010 — Transition Contract Preserved
 
@@ -82,7 +82,7 @@ FS-003 conformance shall not require a particular Agent provider, bootstrap prom
 
 **Classification: S**
 
-When the same ADR-derived application is realized for multiple providers or packaging environments, each claimed semantically compatible realization shall preserve the Ruleset, Dataset, instance, authority, and transition meaning required by the operations it supports.
+When the same ADR-derived application is realized for multiple providers or packaging environments, each claimed semantically compatible realization shall preserve the applicable Ruleset semantics, committed Dataset state, instance identity, authority boundaries, and transition semantics required by the operations it supports.
 
 ### FS-003-NR-015 — Seed-Spec Artifact Realization
 
@@ -100,7 +100,7 @@ The FS-003 seed-spec artifact shall preserve the complete active FS-003 normativ
 
 **Classification: M**
 
-The FS-003 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`.
+The FS-003 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`.
 
 ### FS-003-NR-018 — Builder and Generated Artifact Non-Authority
 

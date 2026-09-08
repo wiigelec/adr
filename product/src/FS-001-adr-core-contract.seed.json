@@ -12,7 +12,7 @@
   },
   "functional_set": "FS-001",
   "title": "ADR Core Contract",
-  "design_revision": "4874ac8f288afeb1b45abbdd042eacec6aa081d5",
+  "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
   "authority": {
     "status": "derived",
     "normative": false,
@@ -48,37 +48,37 @@
       "id": "FS-001-NR-005",
       "title": "Ruleset Governs Transition Validity",
       "classification": "S",
-      "text": "A proposed Dataset state transition shall be judged according to application-owned Ruleset semantics and current Dataset meaning rather than being considered valid merely because the Agent or implementation can produce it."
+      "text": "A proposed Dataset state transition shall be judged according to applicable Ruleset semantics interpreted against current committed Dataset state rather than being considered valid merely because the Agent or implementation can produce it."
     },
     {
       "id": "FS-001-NR-006",
       "title": "Proposed State Is Not Committed State",
       "classification": "S",
-      "text": "Agent reasoning or user input that could change application state shall remain non-authoritative with respect to committed Dataset state until the derived application's transition semantics accept the resulting proposal."
+      "text": "Agent reasoning or user input that could change application state shall remain non-authoritative with respect to committed Dataset state until the derived application's Ruleset-owned transition semantics accept the resulting proposal."
     },
     {
       "id": "FS-001-NR-007",
-      "title": "Transition Acceptance Is Application-Owned",
+      "title": "Transition Acceptance Is Ruleset-Owned",
       "classification": "S",
-      "text": "Each ADR-derived application shall define the semantics that determine when a proposed state transition becomes accepted and therefore becomes the next committed Dataset state."
+      "text": "Each ADR-derived application shall define, as Ruleset-owned semantics, the conditions that determine when a proposed state transition becomes accepted and therefore becomes the next committed Dataset state."
     },
     {
       "id": "FS-001-NR-008",
       "title": "Transition Acceptance Must Preserve Governing Meaning",
       "classification": "S",
-      "text": "A transition-acceptance mechanism shall not invent application semantics beyond the derived application's applicable Ruleset and Dataset model."
+      "text": "A transition-acceptance mechanism shall not invent application semantics beyond the derived application's applicable Ruleset or treat Dataset data as an independent source of governing rules."
     },
     {
       "id": "FS-001-NR-009",
-      "title": "Derived Dataset Semantics",
+      "title": "Ruleset Governs Dataset State Definition",
       "classification": "S",
-      "text": "Each ADR-derived application shall define the concrete Dataset semantics necessary to identify its committed application state and the meaning of accepted state transitions."
+      "text": "Each ADR-derived application shall define, as Ruleset semantics, the permitted structure, interpretation, validity, and transition meaning of Dataset state; the actual committed values governed by those semantics remain Dataset-owned data."
     },
     {
       "id": "FS-001-NR-010",
       "title": "Derived Ruleset Semantics",
       "classification": "S",
-      "text": "Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation and state-transition validity."
+      "text": "Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, state-transition validity, and transition acceptance."
     },
     {
       "id": "FS-001-NR-011",
@@ -120,7 +120,7 @@
       "id": "FS-001-NR-017",
       "title": "Seed-Spec Artifact Identity and Traceability",
       "classification": "M",
-      "text": "The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `4874ac8f288afeb1b45abbdd042eacec6aa081d5`."
+      "text": "The FS-001 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-001, and record the exact FS-001 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`."
     },
     {
       "id": "FS-001-NR-018",

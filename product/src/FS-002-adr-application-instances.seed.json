@@ -12,7 +12,7 @@
   },
   "functional_set": "FS-002",
   "title": "ADR Application Instances and Ruleset Binding",
-  "design_revision": "87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de",
+  "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
   "authority": {
     "status": "derived",
     "normative": false,
@@ -78,13 +78,13 @@
       "id": "FS-002-NR-010",
       "title": "Consequential Ruleset Evolution",
       "classification": "S",
-      "text": "When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined."
+      "text": "When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the Ruleset-owned compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined."
     },
     {
       "id": "FS-002-NR-011",
       "title": "No Silent Retroactive Reinterpretation",
       "classification": "S",
-      "text": "A changed Ruleset shall not silently retroactively reinterpret committed Dataset state unless the derived application's own semantics establish that resulting meaning."
+      "text": "A changed Ruleset shall not silently retroactively reinterpret committed Dataset state unless the derived application's applicable Ruleset semantics establish that resulting meaning."
     },
     {
       "id": "FS-002-NR-012",
@@ -96,7 +96,7 @@
       "id": "FS-002-NR-013",
       "title": "Agent Reuse Does Not Transfer State",
       "classification": "S",
-      "text": "Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset and transition semantics."
+      "text": "Reuse of an Agent implementation, model, or reasoning session mechanism across application instances shall not by itself transfer committed Dataset state or create cross-instance state authority. Any cross-instance state operation shall be explicitly authorized by the applicable Ruleset semantics."
     },
     {
       "id": "FS-002-NR-014",
@@ -120,7 +120,7 @@
       "id": "FS-002-NR-017",
       "title": "Seed-Spec Artifact Identity and Traceability",
       "classification": "M",
-      "text": "The FS-002 seed-spec artifact shall identify ADR as Agent \u00b7 Dataset \u00b7 Ruleset, identify itself as derived from FS-002, and record the exact FS-002 Design revision `87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de`."
+      "text": "The FS-002 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-002, and record the exact FS-002 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`."
     },
     {
       "id": "FS-002-NR-018",

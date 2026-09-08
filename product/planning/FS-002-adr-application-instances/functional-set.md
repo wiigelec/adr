@@ -1,7 +1,7 @@
 # FS-002 — ADR Application Instances and Ruleset Binding
 
 functional_set: FS-002
-design_revision: 87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de
+design_revision: 1918caa562dc459de34f1181bf72dca24ec4dbeb
 
 ## Purpose
 
@@ -11,7 +11,7 @@ It selects the application-topology meaning added to accepted ADR Design after F
 
 ## Selected Design Scope
 
-FS-002 consumes ADR Design at revision `87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de`, including:
+FS-002 consumes ADR Design at revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`, including:
 
 - DP-100 — ADR Architecture:
   - application definition and application instances;
@@ -33,7 +33,7 @@ FS-002 consumes ADR Design at revision `87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de
   - instance-bound reasoning inputs;
   - Dataset transition isolation;
   - continuation under an applicable Ruleset/Dataset binding;
-  - incompatibility behavior delegated to application-owned semantics.
+  - incompatibility behavior governed by Ruleset-owned semantics.
 - DP-140 — Session Continuity:
   - continuity evaluated independently per application instance;
   - Ruleset identity/traceability where multiple Ruleset states coexist;
@@ -51,7 +51,7 @@ FS-002 includes:
 - semantic determinacy of the applicable Ruleset when multiple governing Ruleset states may coexist;
 - preservation of Ruleset/Dataset semantic distinction when physically co-located;
 - support for separately managed shared Ruleset authority and independently stored Datasets;
-- application-owned compatibility, migration, refusal, recovery, or other semantics when consequential Ruleset evolution affects existing Dataset state; and
+- Ruleset-owned compatibility, migration, refusal, recovery, or other semantics when consequential Ruleset evolution affects existing Dataset state; and
 - Agent reasoning bound to the selected Dataset instance and applicable Ruleset for the active operation.
 
 ## Exclusions

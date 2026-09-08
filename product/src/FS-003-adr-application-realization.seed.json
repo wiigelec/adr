@@ -12,7 +12,7 @@
   },
   "functional_set": "FS-003",
   "title": "ADR Application Realization and Initialization",
-  "design_revision": "44d6ca44a408c2d4c79dba95d4dc363400ae1743",
+  "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
   "authority": {
     "status": "derived",
     "normative": false,
@@ -30,13 +30,13 @@
       "id": "FS-003-NR-002",
       "title": "Initialization Determinacy",
       "classification": "S",
-      "text": "A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any application-owned initialization semantics required before ordinary reasoning can proceed."
+      "text": "A realization intended to initialize an Agent without prior application-specific conversational context shall provide or resolve enough information to determine the application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and any Ruleset-owned initialization semantics required before ordinary reasoning can proceed."
     },
     {
       "id": "FS-003-NR-003",
       "title": "Application Identity",
       "classification": "S",
-      "text": "Initialization shall establish which ADR-derived application semantics govern the reasoning operation."
+      "text": "Initialization shall establish which ADR-derived application's applicable Ruleset semantics govern the reasoning operation."
     },
     {
       "id": "FS-003-NR-004",
@@ -72,7 +72,7 @@
       "id": "FS-003-NR-009",
       "title": "Read-Only Reasoning Permitted",
       "classification": "S",
-      "text": "After initialization, an Agent may inspect, summarize, explain, or otherwise reason about application state without creating a Dataset transition when the applicable application semantics classify the operation as non-mutating."
+      "text": "After initialization, an Agent may inspect, summarize, explain, or otherwise reason about application state without creating a Dataset transition when the applicable Ruleset semantics classify the operation as non-mutating."
     },
     {
       "id": "FS-003-NR-010",
@@ -102,7 +102,7 @@
       "id": "FS-003-NR-014",
       "title": "Cross-Realization Semantic Preservation",
       "classification": "S",
-      "text": "When the same ADR-derived application is realized for multiple providers or packaging environments, each claimed semantically compatible realization shall preserve the Ruleset, Dataset, instance, authority, and transition meaning required by the operations it supports."
+      "text": "When the same ADR-derived application is realized for multiple providers or packaging environments, each claimed semantically compatible realization shall preserve the applicable Ruleset semantics, committed Dataset state, instance identity, authority boundaries, and transition semantics required by the operations it supports."
     },
     {
       "id": "FS-003-NR-015",
@@ -120,7 +120,7 @@
       "id": "FS-003-NR-017",
       "title": "Seed-Spec Artifact Identity and Traceability",
       "classification": "M",
-      "text": "The FS-003 seed-spec artifact shall identify ADR as Agent \u00b7 Dataset \u00b7 Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`."
+      "text": "The FS-003 seed-spec artifact shall identify ADR as Agent · Dataset · Ruleset, identify itself as derived from FS-003, and record the exact FS-003 Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`."
     },
     {
       "id": "FS-003-NR-018",

@@ -14,7 +14,7 @@ FUNCTIONAL_SETS = {
     "FS-001": {
         "spec": ROOT / "product" / "specs" / "FS-001-adr-core-contract.md",
         "artifact": ROOT / "product" / "src" / "FS-001-adr-core-contract.seed.json",
-        "design_revision": "4874ac8f288afeb1b45abbdd042eacec6aa081d5",
+        "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
         "title": "ADR Core Contract",
         "requirement_count": 18,
         "mechanical_requirements": {"FS-001-NR-015", "FS-001-NR-016", "FS-001-NR-017"},
@@ -22,7 +22,7 @@ FUNCTIONAL_SETS = {
     "FS-002": {
         "spec": ROOT / "product" / "specs" / "FS-002-adr-application-instances.md",
         "artifact": ROOT / "product" / "src" / "FS-002-adr-application-instances.seed.json",
-        "design_revision": "87b0ab6d1dfcb5a0a18f93e1c04bf845265e71de",
+        "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
         "title": "ADR Application Instances and Ruleset Binding",
         "requirement_count": 18,
         "mechanical_requirements": {"FS-002-NR-015", "FS-002-NR-016", "FS-002-NR-017"},
@@ -30,7 +30,7 @@ FUNCTIONAL_SETS = {
     "FS-003": {
         "spec": ROOT / "product" / "specs" / "FS-003-adr-application-realization.md",
         "artifact": ROOT / "product" / "src" / "FS-003-adr-application-realization.seed.json",
-        "design_revision": "44d6ca44a408c2d4c79dba95d4dc363400ae1743",
+        "design_revision": "1918caa562dc459de34f1181bf72dca24ec4dbeb",
         "title": "ADR Application Realization and Initialization",
         "requirement_count": 18,
         "mechanical_requirements": {"FS-003-NR-015", "FS-003-NR-016", "FS-003-NR-017"},

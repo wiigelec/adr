@@ -62,7 +62,7 @@ The artifact must preserve the semantic boundary:
 
 `current committed Dataset state + Ruleset + user input + Agent reasoning → proposed next state → governed acceptance → next committed Dataset state`
 
-Acceptance remains application-specific.
+Acceptance remains application-specific and is defined by Ruleset-owned transition-acceptance semantics.
 
 ## Bounded Context and Missing Authority
 

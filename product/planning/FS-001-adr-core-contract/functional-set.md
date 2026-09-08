@@ -1,7 +1,7 @@
 # FS-001 — ADR Core Contract
 
 functional_set: FS-001
-design_revision: 4874ac8f288afeb1b45abbdd042eacec6aa081d5
+design_revision: 1918caa562dc459de34f1181bf72dca24ec4dbeb
 
 ## Purpose
 
@@ -11,7 +11,7 @@ It selects the core Agent, Dataset, Ruleset, authority, state-transition, and se
 
 ## Selected Design Scope
 
-FS-001 consumes ADR Design at revision `4874ac8f288afeb1b45abbdd042eacec6aa081d5` including:
+FS-001 consumes ADR Design at revision `1918caa562dc459de34f1181bf72dca24ec4dbeb` including:
 
 - DP-100 — ADR Architecture:
   - Agent, Dataset, and Ruleset roles;
@@ -48,10 +48,10 @@ FS-001 includes:
 - transient Agent/session/model state;
 - Ruleset ownership of interpretation and transition governance;
 - the distinction between proposed and committed state;
-- application-owned transition acceptance semantics;
+- Ruleset-owned transition acceptance semantics;
 - bounded context fidelity and traceability;
 - underspecification when required authority is missing;
-- derived-application ownership of concrete state and governance semantics; and
+- derived-application definition of Ruleset semantics and Dataset ownership of committed state; and
 - one distributable seed-spec artifact carrying the accepted FS-001 contract.
 
 ## Exclusions

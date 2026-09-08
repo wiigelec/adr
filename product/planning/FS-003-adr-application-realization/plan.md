@@ -14,7 +14,7 @@ Accepted Product Design remains the semantic source for FS-003 Planning. The FS-
 
 ## Initialization Contract
 
-A realization intended to initialize an Agent without prior application-specific conversational context shall expose or resolve enough information to determine the ADR-derived application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and application-owned initialization semantics required for the operation.
+A realization intended to initialize an Agent without prior application-specific conversational context shall expose or resolve enough information to determine the ADR-derived application, selected application instance, applicable Ruleset authority where consequential, relevant authoritative Dataset state, and Ruleset-owned initialization semantics required for the operation.
 
 Initialization shall not itself commit Dataset state merely because the realization was loaded, attached, selected, discovered, or bound.
 
@@ -36,7 +36,7 @@ Planning shall produce `product/specs/FS-003-adr-application-realization.md`.
 
 ## Build Output
 
-Build shall create one product-owned distributable FS-003 seed-spec artifact under `product/src/`. The artifact shall identify ADR, FS-003, exact Design revision `44d6ca44a408c2d4c79dba95d4dc363400ae1743`, canonical specification source, and complete active normative contract. It shall use the existing JSON seed-spec representation and shall not become a required runtime dependency.
+Build shall create one product-owned distributable FS-003 seed-spec artifact under `product/src/`. The artifact shall identify ADR, FS-003, exact Design revision `1918caa562dc459de34f1181bf72dca24ec4dbeb`, canonical specification source, and complete active normative contract. It shall use the existing JSON seed-spec representation and shall not become a required runtime dependency.
 
 ## Build Validation
 
