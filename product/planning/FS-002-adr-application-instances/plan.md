@@ -69,6 +69,8 @@ The normative contract shall permit both:
 
 When a Ruleset change can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define Ruleset-owned semantics that determine compatibility, migration, acceptance, refusal, recovery, or other defined behavior.
 
+Validators, compatibility checkers, migration implementations, and equivalent mechanisms may realize or apply those Ruleset-owned semantics, but shall not become independent semantic authorities merely because they execute mechanically, operate on Dataset data, or are physically stored with Dataset material.
+
 FS-002 shall not prescribe one universal migration algorithm or versioning technology.
 
 ## Agent Session Contract

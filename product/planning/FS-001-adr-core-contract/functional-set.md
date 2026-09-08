@@ -25,7 +25,8 @@ FS-001 consumes ADR Design at revision `1918caa562dc459de34f1181bf72dca24ec4dbeb
   - runtime independence.
 - DP-110 — Ruleset Architecture:
   - governed application semantics;
-  - transition validity;
+  - Ruleset ownership of Dataset structural/schema requirements, interpretation, validity, invariants, transition validity, and transition acceptance;
+  - mechanical rule realizations as implementations rather than independent semantic authority;
   - bounded context fidelity;
   - missing-governance underspecification.
 - DP-120 — Dataset Architecture:
@@ -46,9 +47,10 @@ FS-001 includes:
 - separation of Agent, Dataset, and Ruleset responsibilities;
 - Dataset authority for committed application state;
 - transient Agent/session/model state;
-- Ruleset ownership of interpretation and transition governance;
+- Ruleset ownership of rules governing Dataset structure/schema, interpretation, validity, invariants, transition validity, and transition acceptance;
 - the distinction between proposed and committed state;
 - Ruleset-owned transition acceptance semantics;
+- schemas, validators, transition checkers, and equivalent enforcement mechanisms as realizations of Ruleset-owned semantics rather than independent semantic authorities;
 - bounded context fidelity and traceability;
 - underspecification when required authority is missing;
 - derived-application definition of Ruleset semantics and Dataset ownership of committed state; and

@@ -18,11 +18,11 @@ The Dataset shall be the sole authority for committed application state within a
 
 Agent working memory, model-local memory, chat history, intermediate reasoning, session buffers, and other transient reasoning state shall not be treated as committed application state unless information derived from them is accepted into the Dataset through the application's governed transition semantics.
 
-### FS-001-NR-004 — Ruleset Governs Interpretation
+### FS-001-NR-004 — Ruleset Governs Dataset Meaning and Validity
 
 **Classification: S**
 
-The Ruleset shall provide the application-owned semantics that govern interpretation of relevant input and current Dataset state.
+The Ruleset shall provide the application-owned semantics governing Dataset structural/schema requirements, interpretation, validity, invariants, and relevant input interpretation.
 
 ### FS-001-NR-005 — Ruleset Governs Transition Validity
 
@@ -54,11 +54,11 @@ A transition-acceptance mechanism shall not invent application semantics beyond 
 
 Each ADR-derived application shall define, as Ruleset semantics, the permitted structure, interpretation, validity, and transition meaning of Dataset state; the actual committed values governed by those semantics remain Dataset-owned data.
 
-### FS-001-NR-010 — Derived Ruleset Semantics
+### FS-001-NR-010 — Ruleset Semantics and Rule-Realization Authority
 
 **Classification: S**
 
-Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, state-transition validity, and transition acceptance.
+Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, Dataset validity, state-transition validity, and transition acceptance. Schemas, validators, transition checkers, and equivalent enforcement mechanisms that realize those semantics shall not become independent semantic authorities through execution, physical placement, or operation on Dataset data.
 
 ### FS-001-NR-011 — Bounded Context Fidelity
 

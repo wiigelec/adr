@@ -40,9 +40,9 @@
     },
     {
       "id": "FS-001-NR-004",
-      "title": "Ruleset Governs Interpretation",
+      "title": "Ruleset Governs Dataset Meaning and Validity",
       "classification": "S",
-      "text": "The Ruleset shall provide the application-owned semantics that govern interpretation of relevant input and current Dataset state."
+      "text": "The Ruleset shall provide the application-owned semantics governing Dataset structural/schema requirements, interpretation, validity, invariants, and relevant input interpretation."
     },
     {
       "id": "FS-001-NR-005",
@@ -76,9 +76,9 @@
     },
     {
       "id": "FS-001-NR-010",
-      "title": "Derived Ruleset Semantics",
+      "title": "Ruleset Semantics and Rule-Realization Authority",
       "classification": "S",
-      "text": "Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, state-transition validity, and transition acceptance."
+      "text": "Each ADR-derived application shall define the concrete Ruleset semantics necessary to govern application interpretation, Dataset validity, state-transition validity, and transition acceptance. Schemas, validators, transition checkers, and equivalent enforcement mechanisms that realize those semantics shall not become independent semantic authorities through execution, physical placement, or operation on Dataset data."
     },
     {
       "id": "FS-001-NR-011",

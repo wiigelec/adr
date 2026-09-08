@@ -58,7 +58,7 @@ A derived application may realize one separately managed Ruleset authority gover
 
 **Classification: S**
 
-When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the Ruleset-owned compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined.
+When Ruleset evolution can alter the interpretation, validity, or permitted transitions of existing Dataset state, the derived application shall define the Ruleset-owned compatibility, migration, acceptance, refusal, recovery, or other semantics needed to keep the affected instance well-defined. Validators, compatibility checkers, migration implementations, and equivalent mechanisms that realize or apply those semantics shall not become independent semantic authorities merely because they execute mechanically or operate on Dataset data.
 
 ### FS-002-NR-011 — No Silent Retroactive Reinterpretation
 

@@ -51,7 +51,8 @@ FS-002 includes:
 - semantic determinacy of the applicable Ruleset when multiple governing Ruleset states may coexist;
 - preservation of Ruleset/Dataset semantic distinction when physically co-located;
 - support for separately managed shared Ruleset authority and independently stored Datasets;
-- Ruleset-owned compatibility, migration, refusal, recovery, or other semantics when consequential Ruleset evolution affects existing Dataset state; and
+- Ruleset-owned compatibility, migration, refusal, recovery, or other semantics when consequential Ruleset evolution affects existing Dataset state;
+- validators, migration implementations, compatibility checkers, and equivalent mechanisms as realizations of those Ruleset-owned semantics rather than independent semantic authorities; and
 - Agent reasoning bound to the selected Dataset instance and applicable Ruleset for the active operation.
 
 ## Exclusions
