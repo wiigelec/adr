@@ -13,7 +13,7 @@ The Dataset is the persistent state machine of an ADR-derived application instan
 
 It represents the durable current state from which an Agent can understand ongoing application work for the selected instance and to which accepted governed state transitions can be persisted.
 
-ADR defines the Dataset role and continuity contract. Each ADR-derived application defines its concrete state model and the Ruleset semantics governing how that state is structured, interpreted, validated, and changed.
+ADR defines the Dataset role and continuity contract. Each ADR-derived application defines the Ruleset semantics governing the permitted kinds, structure, interpretation, validity, and transition of Dataset state. Each application instance supplies the actual committed Dataset state governed by those semantics.
 
 
 ## Application-Instance State
@@ -123,9 +123,9 @@ ADR does not prescribe the binding representation or storage mechanism.
 
 SCF concerns persistent state, state continuity, and preserving meaningful Dataset authority across Agent sessions.
 
-SCF is not itself the concrete Dataset state model or the Ruleset semantics governing that state for every ADR-derived application.
+SCF is not itself the concrete committed Dataset state of an application instance or the Ruleset semantics governing that state.
 
-A derived application uses or specializes SCF to realize the continuity behavior required by its own state model.
+A derived application uses or specializes SCF to realize the continuity behavior required for application-instance Dataset state governed by its Ruleset.
 
 ## SCF Contract Foundation
 
@@ -183,7 +183,7 @@ ADR does not impose one universal model for those concerns.
 
 ## Derived-Application Responsibility
 
-Each ADR-derived application defines its Dataset state model and the Ruleset semantics governing that state and its transitions.
+Each ADR-derived application defines the Ruleset semantics governing permitted Dataset state and its transitions. Each application instance independently owns its actual committed Dataset state.
 
 ADR supplies the architectural roles, ownership boundary, and continuity contract.
 

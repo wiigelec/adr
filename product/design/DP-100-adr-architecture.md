@@ -85,14 +85,14 @@ The Ruleset governs the interpretation and validity of the transition. The Datas
 
 An ADR-derived application specializes the seed architecture by defining its own:
 
-- Ruleset semantics governing Dataset structure, interpretation, validity, and state transition,
+- Ruleset semantics governing permitted Dataset structure, state vocabulary, interpretation, validity, and state transition,
 - Ruleset context and governance semantics,
 - transition acceptance semantics,
-- Ruleset semantics governing the permitted Dataset state vocabulary and structure,
-- committed application-instance Dataset state,
 - relationships between user input, Agent reasoning, and state change,
 - Agent behavior needed by the application,
 - concrete realization and implementation choices.
+
+The derived application defines the rules governing what Dataset state may mean and become. Each application instance independently owns the actual committed Dataset state produced and accepted under those rules.
 
 A derived application may therefore be highly domain-specific while remaining structurally grounded in ADR.
 
@@ -101,7 +101,7 @@ ADR conformance is about preserving the defined Agent, Dataset, Ruleset responsi
 
 ## Application Definition and Application Instances
 
-An ADR-derived application defines reusable application meaning through its Ruleset semantics, including the rules governing Dataset structure and transition, together with its Dataset state model and required Agent behavior.
+An ADR-derived application defines reusable application meaning through its Ruleset semantics, including the rules governing Dataset structure, interpretation, validity, and transition, together with the required Agent behavior. Individual application instances supply the actual committed Dataset state governed by those semantics.
 
 A derived application may support one or more **application instances**. An application instance is one independently continuing stateful instance of that application whose committed state is represented by its own Dataset.
 
